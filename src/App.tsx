@@ -1,24 +1,42 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const [access, setAccess] = useState();
+  const [inputs, setInputs] = useState<Map<string, any>>(new Map());
+
+
+  useEffect(() => {
+    let midi = null;  // global MIDIAccess object
+    function onMIDISuccess(midiAccess: any) {
+      console.log("MIDI ready!");
+      setAccess(midiAccess);
+      setInputs(midiAccess.inputs);
+      midi = midiAccess;  // store in the global (in real usage, would probably keep in an object instance)
+    }
+
+    function onMIDIFailure(msg: any) {
+      console.error(`Failed to get MIDI access - ${msg}`);
+    }
+
+    navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+  }, [])
+
+  const onClick = () => {
+    console.log(access);
+    inputs.forEach((input) => {
+      console.log(input.name); /* inherited property from MIDIPort */
+      input.onmidimessage = (message: any) => {
+        console.log(message.data);
+      }
+    })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={onClick}>Check Inputs</button>
     </div>
   );
 }
