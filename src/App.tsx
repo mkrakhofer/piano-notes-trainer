@@ -41,18 +41,22 @@ function App() {
 
   const handleNoteOn = (noteOnBinString: string) => {
     /*
-            e.g.: 10010000 00111100 01001101
-            10010000 -> "Note on"
-            00111100 -> Key
-            01001101 -> Velocity
-         */
+                e.g.: 10010000 00111100 01001101
+                10010000 -> "Note on"
+                00111100 -> Key
+                01001101 -> Velocity
+             */
     const key = noteOnBinString.substring(8, 16);
     console.log("KEY: ", getKeyByBinString(key));
   };
 
   const reconnect = () => {
     disconnect();
-    navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+    try {
+      navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+    } catch (e) {
+      console.log("Web MIDI API is not available for this browser.");
+    }
   };
 
   const disconnect = () => {
