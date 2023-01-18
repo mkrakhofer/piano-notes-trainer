@@ -1,0 +1,11 @@
+.note {
+  flex: 1;
+  min-width: 24px;
+  width: 24px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid black;
+  position: relative;
+  bottom: 8px;
+}
+/*# sourceMappingURL=note.css.map */

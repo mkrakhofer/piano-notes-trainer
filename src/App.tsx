@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { IKey, Keymap } from "./keymap";
+import { INote, Notemap } from "./notemap";
 import { Grid } from "./components/grid/grid";
+import { allNotes } from "./n";
 
 type MIDIAccess = WebMidi.MIDIAccess;
 type MIDIInputMap = WebMidi.MIDIInputMap;
@@ -41,11 +42,11 @@ function App() {
 
   const handleNoteOn = (noteOnBinString: string) => {
     /*
-                e.g.: 10010000 00111100 01001101
-                10010000 -> "Note on"
-                00111100 -> Key
-                01001101 -> Velocity
-             */
+                            e.g.: 10010000 00111100 01001101
+                            10010000 -> "Note on"
+                            00111100 -> Key
+                            01001101 -> Velocity
+                         */
     const key = noteOnBinString.substring(8, 16);
     console.log("KEY: ", getKeyByBinString(key));
   };
@@ -65,8 +66,8 @@ function App() {
     });
   };
 
-  const getKeyByBinString = (binString: string): IKey => {
-    return Keymap.get(binString)!;
+  const getKeyByBinString = (binString: string): INote => {
+    return Notemap.get(binString)!;
   };
 
   const onMIDISuccess = (midiAccess: MIDIAccess) => {
@@ -82,7 +83,7 @@ function App() {
     <div className="App">
       Connections: {inputs.size}
       <button onClick={reconnect}>Reset Connection</button>
-      <Grid />
+      <Grid notes={allNotes} />
     </div>
   );
 }
