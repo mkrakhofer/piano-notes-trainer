@@ -3,6 +3,21 @@
   background: lightgray;
   height: 1px;
   margin: 8px 0;
+  padding-left: 80px;
+}
+.line .border-left {
+  position: absolute;
+  left: 0;
+  height: 18px;
+  width: 1px;
+  background: black;
+}
+.line .border-right {
+  position: absolute;
+  right: 0;
+  height: 18px;
+  width: 1px;
+  background: black;
 }
 .line .gap {
   flex: 1;

@@ -28,6 +28,8 @@ interface IProps {
   // visible
   v?: boolean;
   notes: INote[];
+  // border on the left / right
+  b?: boolean;
 }
 
 export const Line = (props: IProps) => {
@@ -36,6 +38,8 @@ export const Line = (props: IProps) => {
   });
   return (
     <div className={className}>
+      {props.b && <div className="border-left" />}
+      {props.b && <div className="border-right" />}
       {props.notes.map((note, key) => {
         if (note === props.n) {
           return <Note note={note} taildir={props.d} key={key} />;

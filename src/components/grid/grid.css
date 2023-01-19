@@ -1,4 +1,16 @@
 .grid {
+  position: relative;
   margin: 64px 8px;
+}
+.grid .treble {
+  position: absolute;
+  top: 78px;
+  height: 136px;
+}
+.grid .bass {
+  position: absolute;
+  top: 287px;
+  height: 55px;
+  left: 15px;
 }
 /*# sourceMappingURL=grid.css.map */
