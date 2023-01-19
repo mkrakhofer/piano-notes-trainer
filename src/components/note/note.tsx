@@ -1,6 +1,7 @@
 import React from "react";
 import "./note.css";
 import { INote } from "../../notemap";
+import clsx from "clsx";
 
 interface IProps {
   taildir: "u" | "d";
@@ -11,12 +12,19 @@ interface IProps {
 }
 
 export const Note = (props: IProps) => {
+
+  const className = clsx('note', {
+    'tail-down': props.taildir === 'd'
+  })
+
   return (
-    <div
-      className="note"
-      id={`${props.note.key}-${props.note.octave}${
-        props.modifier ? "-" + props.modifier : ""
-      }`}
-    />
+      <div
+          className={className}
+          id={`${props.note.key}-${props.note.octave}${
+              props.modifier ? "-" + props.modifier : ""
+          }`}
+      >
+        <div className="tail"/>
+      </div>
   );
 };

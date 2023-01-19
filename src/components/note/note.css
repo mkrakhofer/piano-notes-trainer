@@ -4,9 +4,21 @@
   width: 24px;
   height: 16px;
   border-radius: 50%;
-  border: 1px solid black;
+  background: black;
   position: relative;
   bottom: 8px;
   margin: 0 16px;
+}
+.note .tail {
+  position: absolute;
+  width: 2px;
+  height: 64px;
+  background: black;
+  right: 0;
+  bottom: 8px;
+}
+.note.tail-down .tail {
+  left: 0;
+  top: 8px;
 }
 /*# sourceMappingURL=note.css.map */
