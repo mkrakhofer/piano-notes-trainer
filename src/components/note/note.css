@@ -29,6 +29,61 @@
   top: -12px;
   height: 32px;
 }
+.note .helper {
+  width: 40px;
+  height: 1px;
+  background: black;
+  position: absolute;
+  left: -8px;
+}
+.note .down-1.offset {
+  top: calc(1 * 18px - 1px);
+}
+.note .down-2.offset {
+  top: calc(2 * 18px - 1px);
+}
+.note .down-3.offset {
+  top: calc(3 * 18px - 1px);
+}
+.note .down-4.offset {
+  top: calc(4 * 18px - 1px);
+}
+.note .down-5.offset {
+  top: calc(5 * 18px - 1px);
+}
+.note .down-1.no-offset {
+  top: calc(1 * 18px - 10px);
+}
+.note .down-2.no-offset {
+  top: calc(2 * 18px - 10px);
+}
+.note .down-3.no-offset {
+  top: calc(3 * 18px - 10px);
+}
+.note .down-4.no-offset {
+  top: calc(4 * 18px - 10px);
+}
+.note .down-5.no-offset {
+  top: calc(5 * 18px - 10px);
+}
+.note .up-1.no-offset {
+  bottom: calc(1 * 18px - 11px);
+}
+.note .up-2.no-offset {
+  bottom: calc(2 * 18px - 11px);
+}
+.note .up-3.no-offset {
+  bottom: calc(3 * 18px - 11px);
+}
+.note .up-1.offset {
+  bottom: calc(1 * 18px - 2px);
+}
+.note .up-2.offset {
+  bottom: calc(2 * 18px - 2px);
+}
+.note .up-3.offset {
+  bottom: calc(3 * 18px - 2px);
+}
 .note.tail-down .tail {
   left: 0;
   top: 8px;

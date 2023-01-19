@@ -30,6 +30,10 @@ interface IProps {
   notes: INote[];
   // border on the left / right
   b?: boolean;
+  // required elper lines for notes
+  h?: number;
+  // helper line offset required?
+  ho?: boolean;
 }
 
 export const Line = (props: IProps) => {
@@ -42,31 +46,109 @@ export const Line = (props: IProps) => {
       {props.b && <div className="border-right" />}
       {props.notes.map((note, key) => {
         if (note === props.n) {
-          return <Note note={note} taildir={props.d} key={key} />;
+          return (
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              key={key}
+            />
+          );
         }
         if (note === props.s) {
-          return <Note note={note} taildir={props.d} key={key} modifier="s" />;
+          return (
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              key={key}
+              modifier="s"
+            />
+          );
         }
         if (note === props.f) {
-          return <Note note={note} taildir={props.d} key={key} modifier="f" />;
+          return (
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              key={key}
+              modifier="f"
+            />
+          );
         }
         if (note === props.sc) {
-          return <Note note={note} taildir={props.d} key={key} />;
+          return (
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              key={key}
+            />
+          );
         }
         if (note === props.fl) {
-          return <Note note={note} taildir={props.d} key={key} />;
+          return (
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              key={key}
+            />
+          );
         }
         if (note === props.scs) {
-          return <Note note={note} taildir={props.d} key={key} modifier="s" />;
+          return (
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              key={key}
+              modifier="s"
+            />
+          );
         }
         if (note === props.scf) {
-          return <Note note={note} taildir={props.d} key={key} modifier="f" />;
+          return (
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              key={key}
+              modifier="f"
+            />
+          );
         }
         if (note === props.fls) {
-          return <Note note={note} taildir={props.d} key={key} modifier="s" />;
+          return (
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              key={key}
+              modifier="s"
+            />
+          );
         }
         if (note === props.flf) {
-          return <Note note={note} taildir={props.d} key={key} modifier="f" />;
+          return (
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              key={key}
+              modifier="f"
+            />
+          );
         }
         return <div key={key} className="gap" />;
       })}

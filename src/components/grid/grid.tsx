@@ -15,7 +15,8 @@ export const Grid = (props: IProps) => {
     <div className="grid">
       <img src={treble} className="treble" alt="logo" />
       <img src={bass} className="bass" alt="logo" />
-      <Line notes={props.notes} d="d" n={N.c_____} />
+
+      <Line notes={props.notes} d="d" n={N.c_____} h={5} ho />
 
       <Line
         notes={props.notes}
@@ -24,6 +25,7 @@ export const Grid = (props: IProps) => {
         f={N.hF___}
         fl={N.h____}
         flf={N.hF____}
+        h={5}
       />
       <Line
         notes={props.notes}
@@ -34,6 +36,8 @@ export const Grid = (props: IProps) => {
         fl={N.a____}
         fls={N.aS____}
         flf={N.aF____}
+        h={4}
+        ho
       />
       <Line
         notes={props.notes}
@@ -44,6 +48,7 @@ export const Grid = (props: IProps) => {
         fl={N.g____}
         fls={N.gS____}
         flf={N.gF____}
+        h={4}
       />
       <Line
         notes={props.notes}
@@ -52,6 +57,8 @@ export const Grid = (props: IProps) => {
         s={N.fS___}
         fl={N.f____}
         fls={N.fS____}
+        h={3}
+        ho
       />
       <Line
         notes={props.notes}
@@ -60,6 +67,7 @@ export const Grid = (props: IProps) => {
         f={N.eF___}
         fl={N.e____}
         flf={N.eF____}
+        h={3}
       />
       <Line
         notes={props.notes}
@@ -70,6 +78,8 @@ export const Grid = (props: IProps) => {
         fl={N.d____}
         fls={N.dS____}
         flf={N.dF____}
+        h={2}
+        ho
       />
       <Line
         notes={props.notes}
@@ -78,9 +88,10 @@ export const Grid = (props: IProps) => {
         s={N.cS___}
         fl={N.c____}
         fls={N.cS____}
+        h={2}
       />
-      <Line notes={props.notes} d="d" n={N.h__} f={N.hF__} />
-      <Line notes={props.notes} d="d" n={N.a__} s={N.aS__} f={N.aF__} />
+      <Line notes={props.notes} d="d" n={N.h__} f={N.hF__} h={1} ho />
+      <Line notes={props.notes} d="d" n={N.a__} s={N.aS__} f={N.aF__} h={1} />
       <Line notes={props.notes} d="d" n={N.g__} s={N.gS__} f={N.gF__} />
 
       <Line notes={props.notes} d="d" n={N.f__} s={N.fS__} v b />
@@ -94,16 +105,16 @@ export const Grid = (props: IProps) => {
       <Line notes={props.notes} d="u" n={N.e_} f={N.eF_} v />
 
       <Line notes={props.notes} d="u" n={N.d_} s={N.dS_} f={N.dF_} />
-      <Line notes={props.notes} d="u" n={N.c_} s={N.cS_} />
-      <Line notes={props.notes} d="u" n={N.h} f={N.hF} />
-      <Line notes={props.notes} d="u" n={N.a} s={N.aS} f={N.aF} />
-      <Line notes={props.notes} d="u" n={N.g} s={N.gS} f={N.gF} />
+      <Line notes={props.notes} d="u" n={N.c_} s={N.cS_} h={1} />
+      <Line notes={props.notes} d="u" n={N.h} f={N.hF} h={1} ho />
+      <Line notes={props.notes} d="u" n={N.a} s={N.aS} f={N.aF} h={2} />
+      <Line notes={props.notes} d="u" n={N.g} s={N.gS} f={N.gF} h={2} ho />
 
-      <Line notes={props.notes} d="d" n={N.g_} s={N.gS_} f={N.gF_} />
-      <Line notes={props.notes} d="d" n={N.f_} s={N.fS_} />
-      <Line notes={props.notes} d="d" n={N.e_} f={N.eF_} />
-      <Line notes={props.notes} d="d" n={N.d_} s={N.dS_} f={N.dF_} />
-      <Line notes={props.notes} d="d" n={N.c_} s={N.cS_} />
+      <Line notes={props.notes} d="d" n={N.g_} s={N.gS_} f={N.gF_} h={3} />
+      <Line notes={props.notes} d="d" n={N.f_} s={N.fS_} h={2} ho />
+      <Line notes={props.notes} d="d" n={N.e_} f={N.eF_} h={2} />
+      <Line notes={props.notes} d="d" n={N.d_} s={N.dS_} f={N.dF_} h={1} ho />
+      <Line notes={props.notes} d="d" n={N.c_} s={N.cS_} h={1} />
       <Line notes={props.notes} d="d" n={N.h} f={N.hF} />
 
       <Line notes={props.notes} d="d" n={N.a} s={N.aS} f={N.aF} v b />
@@ -145,7 +156,15 @@ export const Grid = (props: IProps) => {
       />
 
       <Line notes={props.notes} d="u" n={N.F} sc={N._F} s={N.FS} scs={N._FS} />
-      <Line notes={props.notes} d="u" n={N.E} sc={N._E} f={N.EF} scf={N._EF} />
+      <Line
+        notes={props.notes}
+        d="u"
+        n={N.E}
+        sc={N._E}
+        f={N.EF}
+        scf={N._EF}
+        h={1}
+      />
       <Line
         notes={props.notes}
         d="u"
@@ -155,11 +174,21 @@ export const Grid = (props: IProps) => {
         scs={N._DS}
         f={N.DF}
         scf={N._DF}
+        h={1}
+        ho
       />
-      <Line notes={props.notes} d="u" n={N.C} sc={N._C} s={N.CS} scs={N._CS} />
+      <Line
+        notes={props.notes}
+        d="u"
+        n={N.C}
+        sc={N._C}
+        s={N.CS}
+        scs={N._CS}
+        h={2}
+      />
 
-      <Line notes={props.notes} d="u" n={N.__H} f={N.__HF} />
-      <Line notes={props.notes} d="u" n={N.__A} s={N.__AS} />
+      <Line notes={props.notes} d="u" n={N.__H} f={N.__HF} h={2} ho />
+      <Line notes={props.notes} d="u" n={N.__A} s={N.__AS} h={3} />
     </div>
   );
 };

@@ -8,7 +8,8 @@ import flat from "../../icons/flat.svg";
 interface IProps {
   taildir: "u" | "d";
   helperLines?: number;
-  helperLinesOffset?: boolean;
+  helperOffset?: boolean;
+
   modifier?: "f" | "s";
   note: INote;
 }
@@ -18,18 +19,75 @@ export const Note = (props: IProps) => {
     "tail-down": props.taildir === "d",
   });
 
+  const id = `${props.note.key}-${props.note.octave}${
+      props.modifier ? "-" + props.modifier : ""
+  }`;
+
   return (
-    <div
-      className={className}
-      id={`${props.note.key}-${props.note.octave}${
-        props.modifier ? "-" + props.modifier : ""
-      }`}
-    >
-      {props.modifier === "s" && (
-        <img src={sharp} className="sharp" alt="logo" />
-      )}
-      {props.modifier === "f" && <img src={flat} className="flat" alt="logo" />}
-      <div className="tail" />
-    </div>
+      <div className={className} id={id}>
+        {props.helperLines && props.helperLines >= 5 && props.taildir === "d" && (
+            <div
+                className={`helper down-5 ${
+                    props.helperOffset ? "offset" : "no-offset"
+                }`}
+            />
+        )}
+        {props.helperLines && props.helperLines >= 4 && props.taildir === "d" && (
+            <div
+                className={`helper down-4 ${
+                    props.helperOffset ? "offset" : "no-offset"
+                }`}
+            />
+        )}
+        {props.helperLines && props.helperLines >= 3 && props.taildir === "d" && (
+            <div
+                className={`helper down-3 ${
+                    props.helperOffset ? "offset" : "no-offset"
+                }`}
+            />
+        )}
+        {props.helperLines && props.helperLines >= 2 && props.taildir === "d" && (
+            <div
+                className={`helper down-2 ${
+                    props.helperOffset ? "offset" : "no-offset"
+                }`}
+            />
+        )}
+        {props.helperLines && props.helperLines >= 1 && props.taildir === "d" && (
+            <div
+                className={`helper down-1 ${
+                    props.helperOffset ? "offset" : "no-offset"
+                }`}
+            />
+        )}
+
+        {props.helperLines && props.helperLines >= 3 && props.taildir === "u" && (
+            <div
+                className={`helper up-3 ${
+                    props.helperOffset ? "offset" : "no-offset"
+                }`}
+            />
+        )}
+        {props.helperLines && props.helperLines >= 2 && props.taildir === "u" && (
+            <div
+                className={`helper up-2 ${
+                    props.helperOffset ? "offset" : "no-offset"
+                }`}
+            />
+        )}
+        {props.helperLines && props.helperLines >= 1 && props.taildir === "u" && (
+            <div
+                className={`helper up-1 ${
+                    props.helperOffset ? "offset" : "no-offset"
+                }`}
+            />
+        )}
+
+        {props.modifier === "s" && (
+            <img src={sharp} className="sharp" alt="logo"/>
+        )}
+        {props.modifier === "f" && <img src={flat} className="flat" alt="logo"/>}
+        <div className="tail"/>
+      </div>
   );
 };
