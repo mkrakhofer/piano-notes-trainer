@@ -7,7 +7,7 @@
   background: black;
   position: relative;
   bottom: 8px;
-  margin: 0 16px;
+  margin: 0 32px;
 }
 .note .tail {
   position: absolute;
@@ -16,6 +16,12 @@
   background: black;
   right: 0;
   bottom: 8px;
+}
+.note .sharp {
+  position: absolute;
+  left: -32px;
+  top: -8px;
+  height: 32px;
 }
 .note.tail-down .tail {
   left: 0;

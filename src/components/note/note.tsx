@@ -2,6 +2,7 @@ import React from "react";
 import "./note.css";
 import { INote } from "../../notemap";
 import clsx from "clsx";
+import sharp from "../../icons/sharp.svg";
 
 interface IProps {
   taildir: "u" | "d";
@@ -12,19 +13,21 @@ interface IProps {
 }
 
 export const Note = (props: IProps) => {
-
-  const className = clsx('note', {
-    'tail-down': props.taildir === 'd'
-  })
+  const className = clsx("note", {
+    "tail-down": props.taildir === "d",
+  });
 
   return (
-      <div
-          className={className}
-          id={`${props.note.key}-${props.note.octave}${
-              props.modifier ? "-" + props.modifier : ""
-          }`}
-      >
-        <div className="tail"/>
-      </div>
+    <div
+      className={className}
+      id={`${props.note.key}-${props.note.octave}${
+        props.modifier ? "-" + props.modifier : ""
+      }`}
+    >
+      {props.modifier === "s" && (
+        <img src={sharp} className="sharp" alt="logo" />
+      )}
+      <div className="tail" />
+    </div>
   );
 };
