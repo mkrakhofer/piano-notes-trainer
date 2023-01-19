@@ -3,6 +3,7 @@ import "./note.css";
 import { INote } from "../../notemap";
 import clsx from "clsx";
 import sharp from "../../icons/sharp.svg";
+import flat from "../../icons/flat.svg";
 
 interface IProps {
   taildir: "u" | "d";
@@ -27,6 +28,7 @@ export const Note = (props: IProps) => {
       {props.modifier === "s" && (
         <img src={sharp} className="sharp" alt="logo" />
       )}
+      {props.modifier === "f" && <img src={flat} className="flat" alt="logo" />}
       <div className="tail" />
     </div>
   );
