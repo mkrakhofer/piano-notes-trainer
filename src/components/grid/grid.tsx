@@ -1,16 +1,16 @@
 import React from "react";
 import "./grid.css";
 import { Line } from "../line/line";
-import { N } from "../../n";
-import { INote } from "../../notemap";
+import { N, PianoNote } from "../../n";
 import treble from "../../icons/treble-clef.svg";
 import bass from "../../icons/bass-clef.svg";
+import { observer } from "mobx-react-lite";
 
 interface IProps {
-  notes: INote[];
+  notes: PianoNote[];
 }
 
-export const Grid = (props: IProps) => {
+export const Grid = observer((props: IProps) => {
   return (
     <div className="grid">
       <img src={treble} className="treble" alt="logo" />
@@ -191,4 +191,4 @@ export const Grid = (props: IProps) => {
       <Line notes={props.notes} d="u" n={N.__A} s={N.__AS} h={3} />
     </div>
   );
-};
+});

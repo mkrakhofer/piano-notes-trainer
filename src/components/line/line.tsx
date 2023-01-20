@@ -1,33 +1,34 @@
 import React from "react";
 import "./line.css";
 import clsx from "clsx";
-import { INote } from "../../notemap";
 import { Note } from "../note/note";
+import { observer } from "mobx-react-lite";
+import { PianoNote } from "../../n";
 
 interface IProps {
   // note
-  n: INote;
+  n: PianoNote;
   // subcontra
-  sc?: INote;
+  sc?: PianoNote;
   // fourline
-  fl?: INote;
+  fl?: PianoNote;
   // sharp
-  s?: INote;
+  s?: PianoNote;
   // fourline sharp
-  fls?: INote;
+  fls?: PianoNote;
   // subcontra sharp
-  scs?: INote;
+  scs?: PianoNote;
   // flat
-  f?: INote;
+  f?: PianoNote;
   // fourline flat
-  flf?: INote;
+  flf?: PianoNote;
   // subcontra flat
-  scf?: INote;
+  scf?: PianoNote;
   // note tail direction (up / down)
   d: "u" | "d";
   // visible
   v?: boolean;
-  notes: INote[];
+  notes: PianoNote[];
   // border on the left / right
   b?: boolean;
   // required elper lines for notes
@@ -36,16 +37,17 @@ interface IProps {
   ho?: boolean;
 }
 
-export const Line = (props: IProps) => {
+export const Line = observer((props: IProps) => {
   const className = clsx("line", {
     visible: props.v,
   });
+
   return (
     <div className={className}>
       {props.b && <div className="border-left" />}
       {props.b && <div className="border-right" />}
       {props.notes.map((note, key) => {
-        if (note === props.n) {
+        if (note.equals(props.n)) {
           return (
             <Note
               helperOffset={props.ho}
@@ -56,7 +58,7 @@ export const Line = (props: IProps) => {
             />
           );
         }
-        if (note === props.s) {
+        if (note.equals(props.s)) {
           return (
             <Note
               helperOffset={props.ho}
@@ -68,7 +70,7 @@ export const Line = (props: IProps) => {
             />
           );
         }
-        if (note === props.f) {
+        if (note.equals(props.f)) {
           return (
             <Note
               helperOffset={props.ho}
@@ -80,7 +82,7 @@ export const Line = (props: IProps) => {
             />
           );
         }
-        if (note === props.sc) {
+        if (note.equals(props.sc)) {
           return (
             <Note
               helperOffset={props.ho}
@@ -91,7 +93,7 @@ export const Line = (props: IProps) => {
             />
           );
         }
-        if (note === props.fl) {
+        if (note.equals(props.fl)) {
           return (
             <Note
               helperOffset={props.ho}
@@ -102,7 +104,7 @@ export const Line = (props: IProps) => {
             />
           );
         }
-        if (note === props.scs) {
+        if (note.equals(props.scs)) {
           return (
             <Note
               helperOffset={props.ho}
@@ -114,7 +116,7 @@ export const Line = (props: IProps) => {
             />
           );
         }
-        if (note === props.scf) {
+        if (note.equals(props.scf)) {
           return (
             <Note
               helperOffset={props.ho}
@@ -126,7 +128,7 @@ export const Line = (props: IProps) => {
             />
           );
         }
-        if (note === props.fls) {
+        if (note.equals(props.fls)) {
           return (
             <Note
               helperOffset={props.ho}
@@ -138,7 +140,7 @@ export const Line = (props: IProps) => {
             />
           );
         }
-        if (note === props.flf) {
+        if (note.equals(props.flf)) {
           return (
             <Note
               helperOffset={props.ho}
@@ -154,4 +156,4 @@ export const Line = (props: IProps) => {
       })}
     </div>
   );
-};
+});

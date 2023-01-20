@@ -1,24 +1,9 @@
-import { N } from "./n";
-
-export interface INote {
-  key: "C" | "D" | "E" | "F" | "G" | "A" | "H";
-  octave:
-    | "SUBCONTRA"
-    | "CONTRA"
-    | "GREAT"
-    | "SMALL"
-    | "1LINE"
-    | "2LINE"
-    | "3LINE"
-    | "4LINE"
-    | "5LINE";
-  modifier?: "sharp" | "flat";
-}
+import {N, PianoNote} from "./n";
 
 /**
  * Maps a 8bit binary key string to corresponding key/octave
  */
-export const Notemap: Map<string, INote> = new Map<string, INote>([
+export const Notemap: Map<string, PianoNote> = new Map<string, PianoNote>([
   ["00010101", N.__A],
   ["00010110", N.__AS],
   ["00010111", N.__H],

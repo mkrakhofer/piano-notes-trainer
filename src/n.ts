@@ -1,324 +1,230 @@
-import { INote } from "./notemap";
+type Key = "C" | "D" | "E" | "F" | "G" | "A" | "H";
+type Octave =
+  | "SUBCONTRA"
+  | "CONTRA"
+  | "GREAT"
+  | "SMALL"
+  | "1LINE"
+  | "2LINE"
+  | "3LINE"
+  | "4LINE"
+  | "5LINE";
+
+export class PianoNote {
+  key: Key;
+  octave: Octave;
+  modifier?: "sharp" | "flat";
+
+  constructor(key: Key, octave: Octave, modifier?: "sharp" | "flat") {
+    this.key = key;
+    this.octave = octave;
+    this.modifier = modifier;
+  }
+
+  public equals(other: PianoNote | undefined) {
+    if (!other) {
+      return false;
+    }
+
+    return (
+      this.key === other.key &&
+      this.octave === other.octave &&
+      this.modifier === other.modifier
+    );
+  }
+}
 
 export class N {
-  static readonly __A: INote = { key: "A", octave: "SUBCONTRA" };
-  static readonly __AS: INote = {
-    key: "A",
-    octave: "SUBCONTRA",
-    modifier: "sharp",
-  };
-  static readonly __H: INote = { key: "H", octave: "SUBCONTRA" };
-  static readonly _C: INote = { key: "C", octave: "CONTRA" };
-  static readonly _CS: INote = {
-    key: "C",
-    octave: "CONTRA",
-    modifier: "sharp",
-  };
-  static readonly _D: INote = { key: "D", octave: "CONTRA" };
-  static readonly _DS: INote = {
-    key: "D",
-    octave: "CONTRA",
-    modifier: "sharp",
-  };
-  static readonly _E: INote = { key: "E", octave: "CONTRA" };
-  static readonly _F: INote = { key: "F", octave: "CONTRA" };
-  static readonly _FS: INote = {
-    key: "F",
-    octave: "CONTRA",
-    modifier: "sharp",
-  };
-  static readonly _G: INote = { key: "G", octave: "CONTRA" };
-  static readonly _GS: INote = {
-    key: "G",
-    octave: "CONTRA",
-    modifier: "sharp",
-  };
-  static readonly _A: INote = { key: "A", octave: "CONTRA" };
-  static readonly _AS: INote = {
-    key: "A",
-    octave: "CONTRA",
-    modifier: "sharp",
-  };
-  static readonly _H: INote = { key: "H", octave: "CONTRA" };
+  static readonly __A: PianoNote = new PianoNote("A", "SUBCONTRA");
+  static readonly __AS: PianoNote = new PianoNote("A", "SUBCONTRA", "sharp");
+  static readonly __H: PianoNote = new PianoNote("H", "SUBCONTRA");
+  static readonly _C: PianoNote = new PianoNote("C", "CONTRA");
+  static readonly _CS: PianoNote = new PianoNote("C", "CONTRA", "sharp");
+  static readonly _D: PianoNote = new PianoNote("D", "CONTRA");
+  static readonly _DS: PianoNote = new PianoNote("D", "CONTRA", "sharp");
+  static readonly _E: PianoNote = new PianoNote("E", "CONTRA");
+  static readonly _F: PianoNote = new PianoNote("F", "CONTRA");
+  static readonly _FS: PianoNote = new PianoNote("F", "CONTRA", "sharp");
+  static readonly _G: PianoNote = new PianoNote("G", "CONTRA");
+  static readonly _GS: PianoNote = new PianoNote("G", "CONTRA", "sharp");
+  static readonly _A: PianoNote = new PianoNote("A", "CONTRA");
+  static readonly _AS: PianoNote = new PianoNote("A", "CONTRA", "sharp");
+  static readonly _H: PianoNote = new PianoNote("H", "CONTRA");
 
-  static readonly C: INote = { key: "C", octave: "GREAT" };
-  static readonly CS: INote = { key: "C", octave: "GREAT", modifier: "sharp" };
-  static readonly D: INote = { key: "D", octave: "GREAT" };
-  static readonly DS: INote = { key: "D", octave: "GREAT", modifier: "sharp" };
-  static readonly E: INote = { key: "E", octave: "GREAT" };
-  static readonly F: INote = { key: "F", octave: "GREAT" };
-  static readonly FS: INote = { key: "F", octave: "GREAT", modifier: "sharp" };
-  static readonly G: INote = { key: "G", octave: "GREAT" };
-  static readonly GS: INote = { key: "G", octave: "GREAT", modifier: "sharp" };
-  static readonly A: INote = { key: "A", octave: "GREAT" };
-  static readonly AS: INote = { key: "A", octave: "GREAT", modifier: "sharp" };
-  static readonly H: INote = { key: "H", octave: "GREAT" };
+  static readonly C: PianoNote = new PianoNote("C", "GREAT");
+  static readonly CS: PianoNote = new PianoNote("C", "GREAT", "sharp");
+  static readonly D: PianoNote = new PianoNote("D", "GREAT");
+  static readonly DS: PianoNote = new PianoNote("D", "GREAT", "sharp");
+  static readonly E: PianoNote = new PianoNote("E", "GREAT");
+  static readonly F: PianoNote = new PianoNote("F", "GREAT");
+  static readonly FS: PianoNote = new PianoNote("F", "GREAT", "sharp");
+  static readonly G: PianoNote = new PianoNote("G", "GREAT");
+  static readonly GS: PianoNote = new PianoNote("G", "GREAT", "sharp");
+  static readonly A: PianoNote = new PianoNote("A", "GREAT");
+  static readonly AS: PianoNote = new PianoNote("A", "GREAT", "sharp");
+  static readonly H: PianoNote = new PianoNote("H", "GREAT");
 
-  static readonly c: INote = { key: "C", octave: "SMALL" };
-  static readonly cS: INote = { key: "C", octave: "SMALL", modifier: "sharp" };
-  static readonly d: INote = { key: "D", octave: "SMALL" };
-  static readonly dS: INote = { key: "D", octave: "SMALL", modifier: "sharp" };
-  static readonly e: INote = { key: "E", octave: "SMALL" };
-  static readonly f: INote = { key: "F", octave: "SMALL" };
-  static readonly fS: INote = { key: "F", octave: "SMALL", modifier: "sharp" };
-  static readonly g: INote = { key: "G", octave: "SMALL" };
-  static readonly gS: INote = { key: "G", octave: "SMALL", modifier: "sharp" };
-  static readonly a: INote = { key: "A", octave: "SMALL" };
-  static readonly aS: INote = { key: "A", octave: "SMALL", modifier: "sharp" };
-  static readonly h: INote = { key: "H", octave: "SMALL" };
+  static readonly c: PianoNote = new PianoNote("C", "SMALL");
+  static readonly cS: PianoNote = new PianoNote("C", "SMALL", "sharp");
+  static readonly d: PianoNote = new PianoNote("D", "SMALL");
+  static readonly dS: PianoNote = new PianoNote("D", "SMALL", "sharp");
+  static readonly e: PianoNote = new PianoNote("E", "SMALL");
+  static readonly f: PianoNote = new PianoNote("F", "SMALL");
+  static readonly fS: PianoNote = new PianoNote("F", "SMALL", "sharp");
+  static readonly g: PianoNote = new PianoNote("G", "SMALL");
+  static readonly gS: PianoNote = new PianoNote("G", "SMALL", "sharp");
+  static readonly a: PianoNote = new PianoNote("A", "SMALL");
+  static readonly aS: PianoNote = new PianoNote("A", "SMALL", "sharp");
+  static readonly h: PianoNote = new PianoNote("H", "SMALL");
 
-  static readonly c_: INote = { key: "C", octave: "1LINE" };
-  static readonly cS_: INote = { key: "C", octave: "1LINE", modifier: "sharp" };
-  static readonly d_: INote = { key: "D", octave: "1LINE" };
-  static readonly dS_: INote = { key: "D", octave: "1LINE", modifier: "sharp" };
-  static readonly e_: INote = { key: "E", octave: "1LINE" };
-  static readonly f_: INote = { key: "F", octave: "1LINE" };
-  static readonly fS_: INote = { key: "F", octave: "1LINE", modifier: "sharp" };
-  static readonly g_: INote = { key: "G", octave: "1LINE" };
-  static readonly gS_: INote = { key: "G", octave: "1LINE", modifier: "sharp" };
-  static readonly a_: INote = { key: "A", octave: "1LINE" };
-  static readonly aS_: INote = { key: "A", octave: "1LINE", modifier: "sharp" };
-  static readonly h_: INote = { key: "H", octave: "1LINE" };
+  static readonly c_: PianoNote = new PianoNote("C", "1LINE");
+  static readonly cS_: PianoNote = new PianoNote("C", "1LINE", "sharp");
+  static readonly d_: PianoNote = new PianoNote("D", "1LINE");
+  static readonly dS_: PianoNote = new PianoNote("D", "1LINE", "sharp");
+  static readonly e_: PianoNote = new PianoNote("E", "1LINE");
+  static readonly f_: PianoNote = new PianoNote("F", "1LINE");
+  static readonly fS_: PianoNote = new PianoNote("F", "1LINE", "sharp");
+  static readonly g_: PianoNote = new PianoNote("G", "1LINE");
+  static readonly gS_: PianoNote = new PianoNote("G", "1LINE", "sharp");
+  static readonly a_: PianoNote = new PianoNote("A", "1LINE");
+  static readonly aS_: PianoNote = new PianoNote("A", "1LINE", "sharp");
+  static readonly h_: PianoNote = new PianoNote("H", "1LINE");
 
-  static readonly c__: INote = { key: "C", octave: "2LINE" };
-  static readonly cS__: INote = {
-    key: "C",
-    octave: "2LINE",
-    modifier: "sharp",
-  };
-  static readonly d__: INote = { key: "D", octave: "2LINE" };
-  static readonly dS__: INote = {
-    key: "D",
-    octave: "2LINE",
-    modifier: "sharp",
-  };
-  static readonly e__: INote = { key: "E", octave: "2LINE" };
-  static readonly f__: INote = { key: "F", octave: "2LINE" };
-  static readonly fS__: INote = {
-    key: "F",
-    octave: "2LINE",
-    modifier: "sharp",
-  };
-  static readonly g__: INote = { key: "G", octave: "2LINE" };
-  static readonly gS__: INote = {
-    key: "G",
-    octave: "2LINE",
-    modifier: "sharp",
-  };
-  static readonly a__: INote = { key: "A", octave: "2LINE" };
-  static readonly aS__: INote = {
-    key: "A",
-    octave: "2LINE",
-    modifier: "sharp",
-  };
-  static readonly h__: INote = { key: "H", octave: "2LINE" };
+  static readonly c__: PianoNote = new PianoNote("C", "2LINE");
+  static readonly cS__: PianoNote = new PianoNote("C", "2LINE", "sharp");
+  static readonly d__: PianoNote = new PianoNote("D", "2LINE");
+  static readonly dS__: PianoNote = new PianoNote("D", "2LINE", "sharp");
+  static readonly e__: PianoNote = new PianoNote("E", "2LINE");
+  static readonly f__: PianoNote = new PianoNote("F", "2LINE");
+  static readonly fS__: PianoNote = new PianoNote("F", "2LINE", "sharp");
+  static readonly g__: PianoNote = new PianoNote("G", "2LINE");
+  static readonly gS__: PianoNote = new PianoNote("G", "2LINE", "sharp");
+  static readonly a__: PianoNote = new PianoNote("A", "2LINE");
+  static readonly aS__: PianoNote = new PianoNote("A", "2LINE", "sharp");
+  static readonly h__: PianoNote = new PianoNote("H", "2LINE");
 
-  static readonly c___: INote = { key: "C", octave: "3LINE" };
-  static readonly cS___: INote = {
-    key: "C",
-    octave: "3LINE",
-    modifier: "sharp",
-  };
-  static readonly d___: INote = { key: "D", octave: "3LINE" };
-  static readonly dS___: INote = {
-    key: "D",
-    octave: "3LINE",
-    modifier: "sharp",
-  };
-  static readonly e___: INote = { key: "E", octave: "3LINE" };
-  static readonly f___: INote = { key: "F", octave: "3LINE" };
-  static readonly fS___: INote = {
-    key: "F",
-    octave: "3LINE",
-    modifier: "sharp",
-  };
-  static readonly g___: INote = { key: "G", octave: "3LINE" };
-  static readonly gS___: INote = {
-    key: "G",
-    octave: "3LINE",
-    modifier: "sharp",
-  };
-  static readonly a___: INote = { key: "A", octave: "3LINE" };
-  static readonly aS___: INote = {
-    key: "A",
-    octave: "3LINE",
-    modifier: "sharp",
-  };
-  static readonly h___: INote = { key: "H", octave: "3LINE" };
+  static readonly c___: PianoNote = new PianoNote("C", "3LINE");
+  static readonly cS___: PianoNote = new PianoNote("C", "3LINE", "sharp");
+  static readonly d___: PianoNote = new PianoNote("D", "3LINE");
+  static readonly dS___: PianoNote = new PianoNote("D", "3LINE", "sharp");
+  static readonly e___: PianoNote = new PianoNote("E", "3LINE");
+  static readonly f___: PianoNote = new PianoNote("F", "3LINE");
+  static readonly fS___: PianoNote = new PianoNote("F", "3LINE", "sharp");
+  static readonly g___: PianoNote = new PianoNote("G", "3LINE");
+  static readonly gS___: PianoNote = new PianoNote("G", "3LINE", "sharp");
+  static readonly a___: PianoNote = new PianoNote("A", "3LINE");
+  static readonly aS___: PianoNote = new PianoNote("A", "3LINE", "sharp");
+  static readonly h___: PianoNote = new PianoNote("H", "3LINE");
 
-  static readonly c____: INote = { key: "C", octave: "4LINE" };
-  static readonly cS____: INote = {
-    key: "C",
-    octave: "4LINE",
-    modifier: "sharp",
-  };
-  static readonly d____: INote = { key: "D", octave: "4LINE" };
-  static readonly dS____: INote = {
-    key: "D",
-    octave: "4LINE",
-    modifier: "sharp",
-  };
-  static readonly e____: INote = { key: "E", octave: "4LINE" };
-  static readonly f____: INote = { key: "F", octave: "4LINE" };
-  static readonly fS____: INote = {
-    key: "F",
-    octave: "4LINE",
-    modifier: "sharp",
-  };
-  static readonly g____: INote = { key: "G", octave: "4LINE" };
-  static readonly gS____: INote = {
-    key: "G",
-    octave: "4LINE",
-    modifier: "sharp",
-  };
-  static readonly a____: INote = { key: "A", octave: "4LINE" };
-  static readonly aS____: INote = {
-    key: "A",
-    octave: "4LINE",
-    modifier: "sharp",
-  };
-  static readonly h____: INote = { key: "H", octave: "4LINE" };
+  static readonly c____: PianoNote = new PianoNote("C", "4LINE");
+  static readonly cS____: PianoNote = new PianoNote("C", "4LINE", "sharp");
+  static readonly d____: PianoNote = new PianoNote("D", "4LINE");
+  static readonly dS____: PianoNote = new PianoNote("D", "4LINE", "sharp");
+  static readonly e____: PianoNote = new PianoNote("E", "4LINE");
+  static readonly f____: PianoNote = new PianoNote("F", "4LINE");
+  static readonly fS____: PianoNote = new PianoNote("F", "4LINE", "sharp");
+  static readonly g____: PianoNote = new PianoNote("G", "4LINE");
+  static readonly gS____: PianoNote = new PianoNote("G", "4LINE", "sharp");
+  static readonly a____: PianoNote = new PianoNote("A", "4LINE");
+  static readonly aS____: PianoNote = new PianoNote("A", "4LINE", "sharp");
+  static readonly h____: PianoNote = new PianoNote("H", "4LINE");
 
-  static readonly c_____: INote = { key: "C", octave: "5LINE" };
+  static readonly c_____: PianoNote = new PianoNote("C", "5LINE");
 
   // ALIAS
 
   // __AS
-  static readonly __HF: INote = {
-    key: "H",
-    octave: "SUBCONTRA",
-    modifier: "flat",
-  };
+  static readonly __HF: PianoNote = new PianoNote("H", "SUBCONTRA", "flat");
 
   // _CS
-  static readonly _DF: INote = { key: "D", octave: "CONTRA", modifier: "flat" };
+  static readonly _DF: PianoNote = new PianoNote("D", "CONTRA", "flat");
 
   // _DS
-  static readonly _EF: INote = { key: "E", octave: "CONTRA", modifier: "flat" };
+  static readonly _EF: PianoNote = new PianoNote("E", "CONTRA", "flat");
 
   // _FS
-  static readonly _GF: INote = { key: "G", octave: "CONTRA", modifier: "flat" };
+  static readonly _GF: PianoNote = new PianoNote("G", "CONTRA", "flat");
 
   // _GS
-  static readonly _AF: INote = { key: "A", octave: "CONTRA", modifier: "flat" };
+  static readonly _AF: PianoNote = new PianoNote("A", "CONTRA", "flat");
 
   // _AS
-  static readonly _HF: INote = { key: "H", octave: "CONTRA", modifier: "flat" };
+  static readonly _HF: PianoNote = new PianoNote("H", "CONTRA", "flat");
 
   // CS
-  static readonly DF: INote = { key: "D", octave: "GREAT", modifier: "flat" };
+  static readonly DF: PianoNote = new PianoNote("D", "GREAT", "flat");
 
   // DS
-  static readonly EF: INote = { key: "E", octave: "GREAT", modifier: "flat" };
+  static readonly EF: PianoNote = new PianoNote("E", "GREAT", "flat");
 
   // FS
-  static readonly GF: INote = { key: "G", octave: "GREAT", modifier: "flat" };
+  static readonly GF: PianoNote = new PianoNote("G", "GREAT", "flat");
 
   // GS
-  static readonly AF: INote = { key: "A", octave: "GREAT", modifier: "flat" };
+  static readonly AF: PianoNote = new PianoNote("A", "GREAT", "flat");
 
   // AS
-  static readonly HF: INote = { key: "H", octave: "GREAT", modifier: "flat" };
+  static readonly HF: PianoNote = new PianoNote("H", "GREAT", "flat");
 
   // cS
-  static readonly dF: INote = { key: "D", octave: "SMALL", modifier: "flat" };
+  static readonly dF: PianoNote = new PianoNote("D", "SMALL", "flat");
 
   // dS
-  static readonly eF: INote = { key: "E", octave: "SMALL", modifier: "flat" };
+  static readonly eF: PianoNote = new PianoNote("E", "SMALL", "flat");
 
   // fS
-  static readonly gF: INote = { key: "G", octave: "SMALL", modifier: "flat" };
+  static readonly gF: PianoNote = new PianoNote("G", "SMALL", "flat");
 
   // gS
-  static readonly aF: INote = { key: "A", octave: "SMALL", modifier: "flat" };
+  static readonly aF: PianoNote = new PianoNote("A", "SMALL", "flat");
 
   // aS
-  static readonly hF: INote = { key: "H", octave: "SMALL", modifier: "flat" };
+  static readonly hF: PianoNote = new PianoNote("H", "SMALL", "flat");
 
   // cS_
-  static readonly dF_: INote = { key: "D", octave: "1LINE", modifier: "flat" };
+  static readonly dF_: PianoNote = new PianoNote("D", "1LINE", "flat");
 
   //dS_
-  static readonly eF_: INote = { key: "E", octave: "1LINE", modifier: "flat" };
+  static readonly eF_: PianoNote = new PianoNote("E", "1LINE", "flat");
   //fS_
-  static readonly gF_: INote = { key: "G", octave: "1LINE", modifier: "flat" };
+  static readonly gF_: PianoNote = new PianoNote("G", "1LINE", "flat");
   //gS_
-  static readonly aF_: INote = { key: "A", octave: "1LINE", modifier: "flat" };
+  static readonly aF_: PianoNote = new PianoNote("A", "1LINE", "flat");
   //aS_
-  static readonly hF_: INote = { key: "H", octave: "1LINE", modifier: "flat" };
+  static readonly hF_: PianoNote = new PianoNote("H", "1LINE", "flat");
   //cS__
-  static readonly dF__: INote = { key: "D", octave: "2LINE", modifier: "flat" };
+  static readonly dF__: PianoNote = new PianoNote("D", "2LINE", "flat");
   //dS__
-  static readonly eF__: INote = { key: "E", octave: "2LINE", modifier: "flat" };
+  static readonly eF__: PianoNote = new PianoNote("E", "2LINE", "flat");
   //fS__
-  static readonly gF__: INote = { key: "G", octave: "2LINE", modifier: "flat" };
+  static readonly gF__: PianoNote = new PianoNote("G", "2LINE", "flat");
   //gS__
-  static readonly aF__: INote = { key: "A", octave: "2LINE", modifier: "flat" };
+  static readonly aF__: PianoNote = new PianoNote("A", "2LINE", "flat");
   //aS__
-  static readonly hF__: INote = { key: "H", octave: "2LINE", modifier: "flat" };
+  static readonly hF__: PianoNote = new PianoNote("H", "2LINE", "flat");
   //cS___
-  static readonly dF___: INote = {
-    key: "D",
-    octave: "3LINE",
-    modifier: "flat",
-  };
+  static readonly dF___: PianoNote = new PianoNote("D", "3LINE", "flat");
   //dS___
-  static readonly eF___: INote = {
-    key: "E",
-    octave: "3LINE",
-    modifier: "flat",
-  };
+  static readonly eF___: PianoNote = new PianoNote("E", "3LINE", "flat");
   //fS___
-  static readonly gF___: INote = {
-    key: "G",
-    octave: "3LINE",
-    modifier: "flat",
-  };
+  static readonly gF___: PianoNote = new PianoNote("G", "3LINE", "flat");
   //gS___
-  static readonly aF___: INote = {
-    key: "A",
-    octave: "3LINE",
-    modifier: "flat",
-  };
+  static readonly aF___: PianoNote = new PianoNote("A", "3LINE", "flat");
   //aS___
-  static readonly hF___: INote = {
-    key: "H",
-    octave: "3LINE",
-    modifier: "flat",
-  };
+  static readonly hF___: PianoNote = new PianoNote("H", "3LINE", "flat");
   //cS____
-  static readonly dF____: INote = {
-    key: "C",
-    octave: "4LINE",
-    modifier: "flat",
-  };
+  static readonly dF____: PianoNote = new PianoNote("C", "4LINE", "flat");
   //dS____
-  static readonly eF____: INote = {
-    key: "E",
-    octave: "4LINE",
-    modifier: "flat",
-  };
+  static readonly eF____: PianoNote = new PianoNote("E", "4LINE", "flat");
   //fS____
-  static readonly gF____: INote = {
-    key: "G",
-    octave: "4LINE",
-    modifier: "flat",
-  };
+  static readonly gF____: PianoNote = new PianoNote("G", "4LINE", "flat");
   //gS____
-  static readonly aF____: INote = {
-    key: "A",
-    octave: "4LINE",
-    modifier: "flat",
-  };
+  static readonly aF____: PianoNote = new PianoNote("A", "4LINE", "flat");
   //aS____
-  static readonly hF____: INote = {
-    key: "H",
-    octave: "4LINE",
-    modifier: "flat",
-  };
+  static readonly hF____: PianoNote = new PianoNote("H", "4LINE", "flat");
 }
 
-export const allNotes: INote[] = [
+export const allNotes: PianoNote[] = [
   N.__A,
   N.__AS,
   N.__HF,
