@@ -4,7 +4,7 @@ import clsx from "clsx";
 import sharp from "../../icons/sharp.svg";
 import flat from "../../icons/flat.svg";
 import { observer } from "mobx-react-lite";
-import { PianoNote } from "../../n";
+import { MusicNote } from "../../n";
 
 interface IProps {
   taildir: "u" | "d";
@@ -12,13 +12,17 @@ interface IProps {
   helperOffset?: boolean;
 
   modifier?: "f" | "s";
-  note: PianoNote;
+  note: MusicNote;
+  isCurrent?: boolean;
+  isSuccess?: boolean;
 }
 
 export const Note = observer((props: IProps) => {
   console.log(props.note);
   const className = clsx("note", {
     "tail-down": props.taildir === "d",
+    "is-current": props.isCurrent,
+    "is-success": props.isSuccess,
   });
 
   const id = `${props.note.key}-${props.note.octave}${

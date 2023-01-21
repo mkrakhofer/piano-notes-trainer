@@ -1,13 +1,13 @@
 import React from "react";
 import "./grid.css";
 import { Line } from "../line/line";
-import { N, PianoNote } from "../../n";
+import { MusicNote, N } from "../../n";
 import treble from "../../icons/treble-clef.svg";
 import bass from "../../icons/bass-clef.svg";
 import { observer } from "mobx-react-lite";
 
 interface IProps {
-  notes: PianoNote[];
+  notes: MusicNote[];
 }
 
 export const Grid = observer((props: IProps) => {

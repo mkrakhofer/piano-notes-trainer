@@ -1,9 +1,9 @@
-import {N, PianoNote} from "./n";
+import {MusicNote, N} from "./n";
 
 /**
  * Maps a 8bit binary key string to corresponding key/octave
  */
-export const Notemap: Map<string, PianoNote> = new Map<string, PianoNote>([
+export const Notemap: Map<string, MusicNote> = new Map<string, MusicNote>([
   ["00010101", N.__A],
   ["00010110", N.__AS],
   ["00010111", N.__H],

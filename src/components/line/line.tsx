@@ -3,32 +3,33 @@ import "./line.css";
 import clsx from "clsx";
 import { Note } from "../note/note";
 import { observer } from "mobx-react-lite";
-import { PianoNote } from "../../n";
+import { MusicNote } from "../../n";
+import { getNotesStore } from "../../stores/notes-store";
 
 interface IProps {
   // note
-  n: PianoNote;
+  n: MusicNote;
   // subcontra
-  sc?: PianoNote;
+  sc?: MusicNote;
   // fourline
-  fl?: PianoNote;
+  fl?: MusicNote;
   // sharp
-  s?: PianoNote;
+  s?: MusicNote;
   // fourline sharp
-  fls?: PianoNote;
+  fls?: MusicNote;
   // subcontra sharp
-  scs?: PianoNote;
+  scs?: MusicNote;
   // flat
-  f?: PianoNote;
+  f?: MusicNote;
   // fourline flat
-  flf?: PianoNote;
+  flf?: MusicNote;
   // subcontra flat
-  scf?: PianoNote;
+  scf?: MusicNote;
   // note tail direction (up / down)
   d: "u" | "d";
   // visible
   v?: boolean;
-  notes: PianoNote[];
+  notes: MusicNote[];
   // border on the left / right
   b?: boolean;
   // required elper lines for notes
@@ -46,113 +47,50 @@ export const Line = observer((props: IProps) => {
     <div className={className}>
       {props.b && <div className="border-left" />}
       {props.b && <div className="border-right" />}
-      {props.notes.map((note, key) => {
-        if (note.equals(props.n)) {
+      {props.notes.map((note, index) => {
+        const isCurrent = index === getNotesStore().currentNoteIndex;
+        const isSuccess = index < getNotesStore().currentNoteIndex;
+        const isNote = note.equals(props.n);
+        const isSharp = note.equals(props.s);
+        const isFlat = note.equals(props.f);
+        const isSubcontra = note.equals(props.sc);
+        const isSubcontraSharp = note.equals(props.scs);
+        const isSubcontraFlat = note.equals(props.scf);
+        const isFourLine = note.equals(props.fl);
+        const isFourLineSharp = note.equals(props.fls);
+        const isFourLineFlat = note.equals(props.flf);
+
+        if (
+          isNote ||
+          isSharp ||
+          isFlat ||
+          isSubcontra ||
+          isSubcontraSharp ||
+          isSubcontraFlat ||
+          isFourLine ||
+          isFourLineSharp ||
+          isFourLineFlat
+        ) {
           return (
             <Note
               helperOffset={props.ho}
               helperLines={props.h}
               note={note}
               taildir={props.d}
-              key={key}
+              modifier={
+                isSharp || isSubcontraSharp || isFourLineSharp
+                  ? "s"
+                  : isFlat || isSubcontraFlat || isFourLineFlat
+                  ? "f"
+                  : undefined
+              }
+              isCurrent={isCurrent}
+              isSuccess={isSuccess}
+              key={index}
             />
           );
         }
-        if (note.equals(props.s)) {
-          return (
-            <Note
-              helperOffset={props.ho}
-              helperLines={props.h}
-              note={note}
-              taildir={props.d}
-              key={key}
-              modifier="s"
-            />
-          );
-        }
-        if (note.equals(props.f)) {
-          return (
-            <Note
-              helperOffset={props.ho}
-              helperLines={props.h}
-              note={note}
-              taildir={props.d}
-              key={key}
-              modifier="f"
-            />
-          );
-        }
-        if (note.equals(props.sc)) {
-          return (
-            <Note
-              helperOffset={props.ho}
-              helperLines={props.h}
-              note={note}
-              taildir={props.d}
-              key={key}
-            />
-          );
-        }
-        if (note.equals(props.fl)) {
-          return (
-            <Note
-              helperOffset={props.ho}
-              helperLines={props.h}
-              note={note}
-              taildir={props.d}
-              key={key}
-            />
-          );
-        }
-        if (note.equals(props.scs)) {
-          return (
-            <Note
-              helperOffset={props.ho}
-              helperLines={props.h}
-              note={note}
-              taildir={props.d}
-              key={key}
-              modifier="s"
-            />
-          );
-        }
-        if (note.equals(props.scf)) {
-          return (
-            <Note
-              helperOffset={props.ho}
-              helperLines={props.h}
-              note={note}
-              taildir={props.d}
-              key={key}
-              modifier="f"
-            />
-          );
-        }
-        if (note.equals(props.fls)) {
-          return (
-            <Note
-              helperOffset={props.ho}
-              helperLines={props.h}
-              note={note}
-              taildir={props.d}
-              key={key}
-              modifier="s"
-            />
-          );
-        }
-        if (note.equals(props.flf)) {
-          return (
-            <Note
-              helperOffset={props.ho}
-              helperLines={props.h}
-              note={note}
-              taildir={props.d}
-              key={key}
-              modifier="f"
-            />
-          );
-        }
-        return <div key={key} className="gap" />;
+        return <div key={index} className="gap" />;
       })}
     </div>
   );

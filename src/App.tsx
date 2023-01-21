@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Notemap } from "./notemap";
 import { Grid } from "./components/grid/grid";
-import { NotesStore } from "./stores/notes-store";
+import { getNotesStore } from "./stores/notes-store";
 import { observer } from "mobx-react-lite";
-import { PianoNote } from "./n";
+import { MusicNote } from "./n";
 
 type MIDIAccess = WebMidi.MIDIAccess;
 type MIDIInputMap = WebMidi.MIDIInputMap;
@@ -16,7 +16,6 @@ type MIDIMessageEvent = WebMidi.MIDIMessageEvent;
  */
 export const App = observer(() => {
   const [inputs, setInputs] = useState<MIDIInputMap>(new Map());
-  const [notesStore] = useState<NotesStore>(new NotesStore());
 
   useEffect(() => {
     reconnect();
@@ -45,13 +44,14 @@ export const App = observer(() => {
 
   const handleNoteOn = (noteOnBinString: string) => {
     /*
-                                                                                    e.g.: 10010000 00111100 01001101
-                                                                                    10010000 -> "Note on"
-                                                                                    00111100 -> Key
-                                                                                    01001101 -> Velocity
-                                                                                 */
+              e.g.: 10010000 00111100 01001101
+              10010000 -> "Note on"
+              00111100 -> Key
+              01001101 -> Velocity
+            */
     const key = noteOnBinString.substring(8, 16);
     console.log("KEY: ", getKeyByBinString(key));
+    getNotesStore().checkOnNote(getKeyByBinString(key));
   };
 
   const reconnect = () => {
@@ -69,7 +69,7 @@ export const App = observer(() => {
     });
   };
 
-  const getKeyByBinString = (binString: string): PianoNote => {
+  const getKeyByBinString = (binString: string): MusicNote => {
     return Notemap.get(binString)!;
   };
 
@@ -86,7 +86,7 @@ export const App = observer(() => {
     <div className="App">
       Connections: {inputs.size}
       <button onClick={reconnect}>Reset Connection</button>
-      <Grid notes={notesStore.currentNotes} />
+      <Grid notes={getNotesStore().currentNotes} />
     </div>
   );
 });

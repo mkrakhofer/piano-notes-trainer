@@ -88,4 +88,16 @@
   left: 0;
   top: 8px;
 }
+.note.is-current {
+  background: orange;
+}
+.note.is-current .tail {
+  background: orange;
+}
+.note.is-success {
+  background: green;
+}
+.note.is-success .tail {
+  background: green;
+}
 /*# sourceMappingURL=note.css.map */
