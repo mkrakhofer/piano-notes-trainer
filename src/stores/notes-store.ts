@@ -7,12 +7,15 @@ export class NotesStore {
   public currentNoteIndex: number;
   public subContraAndContraActive: boolean = false;
   public greatActive: boolean = false;
-  public smallActive: boolean = false;
+  public smallActive: boolean = true;
   public oneLineActive: boolean = true;
   public twoLineActive: boolean = false;
   public threeLineActive: boolean = false;
   public fourAndFiveLineActive: boolean = false;
   public amountOfFlatsAndSharps: "LOW" | "MEDIUM" | "HIGH" = "LOW";
+  public preferredClefSetting: "TREBLE" | "BASS" | "RANDOM" = "RANDOM";
+
+  public currentPreferredClef: "TREBLE" | "BASS" = "TREBLE";
 
   constructor() {
     makeAutoObservable(this);
@@ -23,6 +26,12 @@ export class NotesStore {
   }
 
   public generateNotes = () => {
+    if (this.preferredClefSetting === "RANDOM") {
+      this.currentPreferredClef = Math.random() * 2 > 0 ? "TREBLE" : "BASS";
+    } else {
+      this.currentPreferredClef = this.preferredClefSetting;
+    }
+
     this.currentNotes = [
       ...this.getRandomNotes(
         this.getWhiteNotesOfOctave(this.getRandomOctave()),
@@ -40,6 +49,7 @@ export class NotesStore {
     if (notes.length === 0) {
       return [];
     }
+
     const randomNotes: MusicNote[] = [];
     for (let i = 0; i < count; i++) {
       const randomIndex = Math.floor(Math.random() * notes.length);

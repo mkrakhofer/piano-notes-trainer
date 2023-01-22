@@ -70,7 +70,7 @@ export const SettingsView = observer((props: IProps) => {
             type={"checkbox"}
           />
           <label>Four- and Five line octave</label>
-          <h2>How many sharps and flats should appear?</h2>
+          <h2>Amount of sharps and flats that should appear?</h2>
           <select
             name="flats-sharps-amount"
             value={store.amountOfFlatsAndSharps}
@@ -82,6 +82,21 @@ export const SettingsView = observer((props: IProps) => {
             <option value="LOW">Low</option>
             <option value="MEDIUM">Medium</option>
             <option value="HIGH">High</option>
+          </select>
+          <h2>
+            Which clef should be used for small- and one line octave notes?
+          </h2>
+          <select
+            name="preferred-clef"
+            value={store.preferredClefSetting}
+            onChange={(e) => {
+              // todo: any
+              store.preferredClefSetting = e.target.value as any;
+            }}
+          >
+            <option value="RANDOM">Random</option>
+            <option value="TREBLE">Treble</option>
+            <option value="BASS">Bass</option>
           </select>
         </div>
         <button onClick={props.onClose}>Close</button>

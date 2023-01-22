@@ -100,25 +100,43 @@ export const Grid = observer((props: IProps) => {
       <Line notes={props.notes} d="d" n={N.c__} s={N.cS__} />
       <Line notes={props.notes} d="d" n={N.h_} f={N.hF_} v b />
       <Line notes={props.notes} d="u" n={N.a_} s={N.aS_} f={N.aF_} />
-      <Line notes={props.notes} d="u" n={N.g_} s={N.gS_} f={N.gF_} v b />
-      <Line notes={props.notes} d="u" n={N.f_} s={N.fS_} />
-      <Line notes={props.notes} d="u" n={N.e_} f={N.eF_} v />
+      <Line notes={props.notes} d="u" n={N.g_} s={N.gS_} f={N.gF_} v b treble />
+      <Line notes={props.notes} d="u" n={N.f_} s={N.fS_} treble />
+      <Line notes={props.notes} d="u" n={N.e_} f={N.eF_} v treble />
 
-      <Line notes={props.notes} d="u" n={N.d_} s={N.dS_} f={N.dF_} />
-      <Line notes={props.notes} d="u" n={N.c_} s={N.cS_} h={1} />
-      <Line notes={props.notes} d="u" n={N.h} f={N.hF} h={1} ho />
-      <Line notes={props.notes} d="u" n={N.a} s={N.aS} f={N.aF} h={2} />
-      <Line notes={props.notes} d="u" n={N.g} s={N.gS} f={N.gF} h={2} ho />
+      <Line notes={props.notes} d="u" n={N.d_} s={N.dS_} f={N.dF_} treble />
+      <Line notes={props.notes} d="u" n={N.c_} s={N.cS_} h={1} treble />
+      <Line notes={props.notes} d="u" n={N.h} f={N.hF} h={1} ho treble />
+      <Line notes={props.notes} d="u" n={N.a} s={N.aS} f={N.aF} h={2} treble />
+      <Line
+        notes={props.notes}
+        d="u"
+        n={N.g}
+        s={N.gS}
+        f={N.gF}
+        h={2}
+        ho
+        treble
+      />
 
-      <Line notes={props.notes} d="d" n={N.g_} s={N.gS_} f={N.gF_} h={3} />
-      <Line notes={props.notes} d="d" n={N.f_} s={N.fS_} h={2} ho />
-      <Line notes={props.notes} d="d" n={N.e_} f={N.eF_} h={2} />
-      <Line notes={props.notes} d="d" n={N.d_} s={N.dS_} f={N.dF_} h={1} ho />
-      <Line notes={props.notes} d="d" n={N.c_} s={N.cS_} h={1} />
-      <Line notes={props.notes} d="d" n={N.h} f={N.hF} />
+      <Line notes={props.notes} d="d" n={N.g_} s={N.gS_} f={N.gF_} h={3} bass />
+      <Line notes={props.notes} d="d" n={N.f_} s={N.fS_} h={2} ho bass />
+      <Line notes={props.notes} d="d" n={N.e_} f={N.eF_} h={2} bass />
+      <Line
+        notes={props.notes}
+        d="d"
+        n={N.d_}
+        s={N.dS_}
+        f={N.dF_}
+        h={1}
+        ho
+        bass
+      />
+      <Line notes={props.notes} d="d" n={N.c_} s={N.cS_} h={1} bass />
+      <Line notes={props.notes} d="d" n={N.h} f={N.hF} bass />
 
-      <Line notes={props.notes} d="d" n={N.a} s={N.aS} f={N.aF} v b />
-      <Line notes={props.notes} d="d" n={N.g} s={N.gS} f={N.gF} />
+      <Line notes={props.notes} d="d" n={N.a} s={N.aS} f={N.aF} v b bass />
+      <Line notes={props.notes} d="d" n={N.g} s={N.gS} f={N.gF} bass />
       <Line notes={props.notes} d="d" n={N.f} s={N.fS} v b />
       <Line notes={props.notes} d="d" n={N.e} f={N.eF} />
       <Line notes={props.notes} d="d" n={N.d} s={N.dS} f={N.dF} v b />

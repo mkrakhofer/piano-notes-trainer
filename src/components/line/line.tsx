@@ -36,6 +36,8 @@ interface IProps {
   h?: number;
   // helper line offset required?
   ho?: boolean;
+  treble?: boolean;
+  bass?: boolean;
 }
 
 export const Line = observer((props: IProps) => {
@@ -48,6 +50,13 @@ export const Line = observer((props: IProps) => {
       {props.b && <div className="border-left" />}
       {props.b && <div className="border-right" />}
       {props.notes.map((note, index) => {
+        if (
+          (props.treble && getNotesStore().currentPreferredClef === "BASS") ||
+          (props.bass && getNotesStore().currentPreferredClef === "TREBLE")
+        ) {
+          return <div key={index} className="gap" />;
+        }
+
         const isCurrent = index === getNotesStore().currentNoteIndex;
         const isSuccess = index < getNotesStore().currentNoteIndex;
         const isNote = note.equals(props.n);
