@@ -45,6 +45,7 @@ interface IProps {
 }
 
 export const Line = observer((props: IProps) => {
+  const notesStore = getNotesStore();
   const className = clsx("line", {
     visible: props.v,
   });
@@ -61,8 +62,8 @@ export const Line = observer((props: IProps) => {
           index === bar.notes.length - 1;
 
         if (
-          (props.treble && getNotesStore().currentPreferredClef === "BASS") ||
-          (props.bass && getNotesStore().currentPreferredClef === "TREBLE")
+          (props.treble && notesStore.currentPreferredClef === "BASS") ||
+          (props.bass && notesStore.currentPreferredClef === "TREBLE")
         ) {
           rendered.push(
             <Gap
@@ -75,12 +76,12 @@ export const Line = observer((props: IProps) => {
         }
         //console.log("NOTE: ", note);
         const isCurrent =
-          barIndex === getNotesStore().currentBarIndex &&
-          index === getNotesStore().currentNoteIndex;
+          barIndex === notesStore.currentBarIndex &&
+          index === notesStore.currentNoteIndex;
         const isSuccess =
-          barIndex < getNotesStore().currentBarIndex ||
-          (barIndex === getNotesStore().currentBarIndex &&
-            index < getNotesStore().currentNoteIndex);
+          barIndex < notesStore.currentBarIndex ||
+          (barIndex === notesStore.currentBarIndex &&
+            index < notesStore.currentNoteIndex);
         const isNote = note.equals(props.n);
         const isSharp = note.equals(props.s);
         const isFlat = note.equals(props.f);
