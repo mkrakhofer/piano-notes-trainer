@@ -1,23 +1,23 @@
 import React from "react";
 import "./settings-view.css";
-import { getNotesStore } from "../../stores/notes-store";
 import { observer } from "mobx-react-lite";
+import { getSettingsStore } from "../../stores/settings-store";
 
 interface IProps {
   onClose: () => void;
 }
 
 export const SettingsView = observer((props: IProps) => {
-  const store = getNotesStore();
+  const settingsStore = getSettingsStore();
   return (
     <div className="settings-view">
       <form>
         <h2>Which octaves should be included?</h2>
         <div className="form-row">
           <input
-            checked={store.subContraAndContraActive}
+            checked={settingsStore.subContraAndContraActive}
             onChange={(e) =>
-              (store.subContraAndContraActive = e.target.checked)
+              (settingsStore.subContraAndContraActive = e.target.checked)
             }
             type={"checkbox"}
           />
@@ -25,58 +25,60 @@ export const SettingsView = observer((props: IProps) => {
         </div>
         <div className="form-row">
           <input
-            checked={store.greatActive}
-            onChange={(e) => (store.greatActive = e.target.checked)}
+            checked={settingsStore.greatActive}
+            onChange={(e) => (settingsStore.greatActive = e.target.checked)}
             type={"checkbox"}
           />
           <label>Great octave</label>
         </div>
         <div className="form-row">
           <input
-            checked={store.smallActive}
-            onChange={(e) => (store.smallActive = e.target.checked)}
+            checked={settingsStore.smallActive}
+            onChange={(e) => (settingsStore.smallActive = e.target.checked)}
             type={"checkbox"}
           />
           <label>Small octave</label>
         </div>
         <div className="form-row">
           <input
-            checked={store.oneLineActive}
-            onChange={(e) => (store.oneLineActive = e.target.checked)}
+            checked={settingsStore.oneLineActive}
+            onChange={(e) => (settingsStore.oneLineActive = e.target.checked)}
             type={"checkbox"}
           />
           <label>One line octave</label>
         </div>
         <div className="form-row">
           <input
-            checked={store.twoLineActive}
-            onChange={(e) => (store.twoLineActive = e.target.checked)}
+            checked={settingsStore.twoLineActive}
+            onChange={(e) => (settingsStore.twoLineActive = e.target.checked)}
             type={"checkbox"}
           />
           <label>Two line octave</label>
         </div>
         <div className="form-row">
           <input
-            checked={store.threeLineActive}
-            onChange={(e) => (store.threeLineActive = e.target.checked)}
+            checked={settingsStore.threeLineActive}
+            onChange={(e) => (settingsStore.threeLineActive = e.target.checked)}
             type={"checkbox"}
           />
           <label>Three line octave</label>
         </div>
         <div className="form-row">
           <input
-            checked={store.fourAndFiveLineActive}
-            onChange={(e) => (store.fourAndFiveLineActive = e.target.checked)}
+            checked={settingsStore.fourAndFiveLineActive}
+            onChange={(e) =>
+              (settingsStore.fourAndFiveLineActive = e.target.checked)
+            }
             type={"checkbox"}
           />
           <label>Four- and Five line octave</label>
           <h2>Amount of sharps and flats that should appear?</h2>
           <select
             name="flats-sharps-amount"
-            value={store.amountOfFlatsAndSharps}
+            value={settingsStore.amountOfFlatsAndSharps}
             onChange={(e) => {
               // todo: any
-              store.amountOfFlatsAndSharps = e.target.value as any;
+              settingsStore.amountOfFlatsAndSharps = e.target.value as any;
             }}
           >
             <option value="LOW">Low</option>
@@ -88,10 +90,10 @@ export const SettingsView = observer((props: IProps) => {
           </h2>
           <select
             name="preferred-clef"
-            value={store.preferredClefSetting}
+            value={settingsStore.preferredClefSetting}
             onChange={(e) => {
               // todo: any
-              store.preferredClefSetting = e.target.value as any;
+              settingsStore.preferredClefSetting = e.target.value as any;
             }}
           >
             <option value="RANDOM">Random</option>

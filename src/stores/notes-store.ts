@@ -2,23 +2,15 @@ import { makeAutoObservable } from "mobx";
 import { MusicNote, Octave } from "../classes/music-note";
 import { N } from "../classes/n";
 import { Bar } from "../classes/bar";
+import { getSettingsStore, SettingsStore } from "./settings-store";
 
 export class NotesStore {
   //private notePool: INote[];
   public currentBars: Bar[];
   public currentNoteIndex: number;
   public currentBarIndex: number;
-  public subContraAndContraActive: boolean = false;
-  public greatActive: boolean = false;
-  public smallActive: boolean = true;
-  public oneLineActive: boolean = true;
-  public twoLineActive: boolean = false;
-  public threeLineActive: boolean = false;
-  public fourAndFiveLineActive: boolean = false;
-  public amountOfFlatsAndSharps: "LOW" | "MEDIUM" | "HIGH" = "LOW";
-  public preferredClefSetting: "TREBLE" | "BASS" | "RANDOM" = "RANDOM";
-
   public currentPreferredClef: "TREBLE" | "BASS" = "TREBLE";
+  public settingsStore: SettingsStore = getSettingsStore();
 
   constructor() {
     makeAutoObservable(this);
@@ -30,11 +22,11 @@ export class NotesStore {
   }
 
   public generateBars = (count: number) => {
-    if (this.preferredClefSetting === "RANDOM") {
+    if (this.settingsStore.preferredClefSetting === "RANDOM") {
       this.currentPreferredClef =
         Math.floor(Math.random() * 2) > 0 ? "TREBLE" : "BASS";
     } else {
-      this.currentPreferredClef = this.preferredClefSetting;
+      this.currentPreferredClef = this.settingsStore.preferredClefSetting;
     }
 
     const bars: Bar[] = [];
@@ -66,7 +58,7 @@ export class NotesStore {
       const randomNote = notes[randomIndex];
 
       let amountOfFlatsAndSharpsThreshold = 8;
-      switch (this.amountOfFlatsAndSharps) {
+      switch (this.settingsStore.amountOfFlatsAndSharps) {
         case "LOW":
           amountOfFlatsAndSharpsThreshold = 8;
           break;
@@ -112,15 +104,15 @@ export class NotesStore {
 
   private getRandomOctave(): Octave | undefined {
     const octavePool: Octave[] = [];
-    this.subContraAndContraActive &&
+    this.settingsStore.subContraAndContraActive &&
       octavePool.push("SUBCONTRA") &&
       octavePool.push("CONTRA");
-    this.greatActive && octavePool.push("GREAT");
-    this.smallActive && octavePool.push("SMALL");
-    this.oneLineActive && octavePool.push("1LINE");
-    this.twoLineActive && octavePool.push("2LINE");
-    this.threeLineActive && octavePool.push("3LINE");
-    this.fourAndFiveLineActive &&
+    this.settingsStore.greatActive && octavePool.push("GREAT");
+    this.settingsStore.smallActive && octavePool.push("SMALL");
+    this.settingsStore.oneLineActive && octavePool.push("1LINE");
+    this.settingsStore.twoLineActive && octavePool.push("2LINE");
+    this.settingsStore.threeLineActive && octavePool.push("3LINE");
+    this.settingsStore.fourAndFiveLineActive &&
       octavePool.push("4LINE") &&
       octavePool.push("5LINE");
 
