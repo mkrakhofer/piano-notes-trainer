@@ -7,6 +7,7 @@ import { observer } from "mobx-react-lite";
 import ReactModal from "react-modal";
 import { SettingsView } from "./components/settings-view/settings-view";
 import { MusicNote } from "./classes/music-note";
+import { getSettingsStore } from "./stores/settings-store";
 
 type MIDIAccess = WebMidi.MIDIAccess;
 type MIDIInputMap = WebMidi.MIDIInputMap;
@@ -47,11 +48,11 @@ export const App = observer(() => {
 
   const handleNoteOn = (noteOnBinString: string) => {
     /*
-                                                                  e.g.: 10010000 00111100 01001101
-                                                                  10010000 -> "Note on"
-                                                                  00111100 -> Key
-                                                                  01001101 -> Velocity
-                                                                */
+                                                                      e.g.: 10010000 00111100 01001101
+                                                                      10010000 -> "Note on"
+                                                                      00111100 -> Key
+                                                                      01001101 -> Velocity
+                                                                    */
     const key = noteOnBinString.substring(8, 16);
     console.log("KEY: ", getKeyByBinString(key));
     getNotesStore().checkOnNote(getKeyByBinString(key));
@@ -72,6 +73,7 @@ export const App = observer(() => {
 
   const closeSettings = () => {
     setShowSettings(false);
+    getSettingsStore().saveSettings();
     getNotesStore().generateBars(2);
   };
 
