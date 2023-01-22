@@ -6,6 +6,7 @@ import treble from "../../icons/treble-clef.svg";
 import bass from "../../icons/bass-clef.svg";
 import { observer } from "mobx-react-lite";
 import { Bar } from "../../classes/bar";
+import { OttavaAltaLine } from "../ottava-alta-line/ottava-alta-line";
 
 interface IProps {
   bars: Bar[];
@@ -14,6 +15,7 @@ interface IProps {
 export const Grid = observer((props: IProps) => {
   return (
     <div className="grid">
+      <OttavaAltaLine bars={props.bars} />
       <img src={treble} className="treble" alt="logo" />
       <img src={bass} className="bass" alt="logo" />
 

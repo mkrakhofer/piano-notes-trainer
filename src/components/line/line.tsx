@@ -45,8 +45,6 @@ interface IProps {
 }
 
 export const Line = observer((props: IProps) => {
-  console.log("RENDER LINE: ", props.bars);
-
   const className = clsx("line", {
     visible: props.v,
   });
@@ -58,31 +56,31 @@ export const Line = observer((props: IProps) => {
       bar.notes.forEach((note, index) => {
         const startOfBar = props.tm && index === 0;
         const endOfLastBar =
-            props.tm &&
-            barIndex === props.bars.length - 1 &&
-            index === bar.notes.length - 1;
+          props.tm &&
+          barIndex === props.bars.length - 1 &&
+          index === bar.notes.length - 1;
 
         if (
-            (props.treble && getNotesStore().currentPreferredClef === "BASS") ||
-            (props.bass && getNotesStore().currentPreferredClef === "TREBLE")
+          (props.treble && getNotesStore().currentPreferredClef === "BASS") ||
+          (props.bass && getNotesStore().currentPreferredClef === "TREBLE")
         ) {
           rendered.push(
-              <Gap
-                  key={`${barIndex}-${index}`}
-                  startOfBar={startOfBar}
-                  endOfLastBar={endOfLastBar}
-              />
+            <Gap
+              key={`${barIndex}-${index}`}
+              startOfBar={startOfBar}
+              endOfLastBar={endOfLastBar}
+            />
           );
           return;
         }
         //console.log("NOTE: ", note);
         const isCurrent =
-            barIndex === getNotesStore().currentBarIndex &&
-            index === getNotesStore().currentNoteIndex;
+          barIndex === getNotesStore().currentBarIndex &&
+          index === getNotesStore().currentNoteIndex;
         const isSuccess =
-            barIndex < getNotesStore().currentBarIndex ||
-            (barIndex === getNotesStore().currentBarIndex &&
-                index < getNotesStore().currentNoteIndex);
+          barIndex < getNotesStore().currentBarIndex ||
+          (barIndex === getNotesStore().currentBarIndex &&
+            index < getNotesStore().currentNoteIndex);
         const isNote = note.equals(props.n);
         const isSharp = note.equals(props.s);
         const isFlat = note.equals(props.f);
@@ -94,44 +92,44 @@ export const Line = observer((props: IProps) => {
         const isFourLineFlat = note.equals(props.flf);
 
         if (
-            isNote ||
-            isSharp ||
-            isFlat ||
-            isSubcontra ||
-            isSubcontraSharp ||
-            isSubcontraFlat ||
-            isFourLine ||
-            isFourLineSharp ||
-            isFourLineFlat
+          isNote ||
+          isSharp ||
+          isFlat ||
+          isSubcontra ||
+          isSubcontraSharp ||
+          isSubcontraFlat ||
+          isFourLine ||
+          isFourLineSharp ||
+          isFourLineFlat
         ) {
           rendered.push(
-              <Note
-                  helperOffset={props.ho}
-                  helperLines={props.h}
-                  note={note}
-                  taildir={props.d}
-                  modifier={
-                    isSharp || isSubcontraSharp || isFourLineSharp
-                        ? "s"
-                        : isFlat || isSubcontraFlat || isFourLineFlat
-                            ? "f"
-                            : undefined
-                  }
-                  isCurrent={isCurrent}
-                  isSuccess={isSuccess}
-                  startOfBar={startOfBar}
-                  endOfLastBar={endOfLastBar}
-                  key={`${barIndex}-${index}`}
-              />
+            <Note
+              helperOffset={props.ho}
+              helperLines={props.h}
+              note={note}
+              taildir={props.d}
+              modifier={
+                isSharp || isSubcontraSharp || isFourLineSharp
+                  ? "s"
+                  : isFlat || isSubcontraFlat || isFourLineFlat
+                  ? "f"
+                  : undefined
+              }
+              isCurrent={isCurrent}
+              isSuccess={isSuccess}
+              startOfBar={startOfBar}
+              endOfLastBar={endOfLastBar}
+              key={`${barIndex}-${index}`}
+            />
           );
           return;
         }
         rendered.push(
-            <Gap
-                key={`${barIndex}-${index}`}
-                startOfBar={startOfBar}
-                endOfLastBar={endOfLastBar}
-            />
+          <Gap
+            key={`${barIndex}-${index}`}
+            startOfBar={startOfBar}
+            endOfLastBar={endOfLastBar}
+          />
         );
       });
     });
@@ -140,10 +138,10 @@ export const Line = observer((props: IProps) => {
   };
 
   return (
-      <div className={className}>
-        {props.b && <div className="border-left"/>}
-        {props.b && <div className="border-right"/>}
-        {renderBars()}
-      </div>
+    <div className={className}>
+      {props.b && <div className="border-left" />}
+      {props.b && <div className="border-right" />}
+      {renderBars()}
+    </div>
   );
 });

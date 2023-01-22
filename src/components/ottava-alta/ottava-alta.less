@@ -1,3 +1,58 @@
 .ottava-alta {
+  position: relative;
+  left: 0;
+  width: 0;
+  height: 0;
 
+  .start {
+    font-style: italic;
+    position: absolute;
+    //background: green;
+    width: 45px;
+    height: 16px;
+
+    .eight {
+      //background: yellow;
+      width: 15px;
+    }
+
+    //https://kovart.github.io/dashed-border-generator/
+    .dashed-line {
+      position: absolute;
+      left: 15px;
+      top: 8px;
+      //background: orange;
+      height: 1px;
+      width: 30px;
+      max-width: 30px;
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23333' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    }
+  }
+
+  .middle {
+    left: 45px;
+    position: absolute;
+    //background: blue;
+    height: 1px;
+    top: 8px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23333' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+
+  }
+
+  .end {
+    position: absolute;
+    //background: red;
+    width: 45px;
+    height: 1px;
+    top: 8px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23333' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+
+    .end-line {
+      height: 8px;
+      width: 1px;
+      background: black;
+      position: absolute;
+      right: 0;
+    }
+  }
 }
