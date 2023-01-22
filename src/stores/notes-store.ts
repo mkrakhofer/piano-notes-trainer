@@ -71,7 +71,10 @@ export class NotesStore {
       }
       const withModifier =
         Math.floor(Math.random() * 10) > amountOfFlatsAndSharpsThreshold;
-      if (withModifier) {
+      if (
+        withModifier &&
+        (randomNote.sharpModifierExists() || randomNote.flatModifierExists())
+      ) {
         if (
           randomNote.sharpModifierExists() &&
           randomNote.flatModifierExists()
@@ -128,6 +131,21 @@ export class NotesStore {
     if (!octave) {
       return [];
     }
+
+    if (octave === "SUBCONTRA" || octave === "CONTRA") {
+      return [
+        ...N.getWhiteKeys().filter((n) => n.octave === "SUBCONTRA"),
+        ...N.getWhiteKeys().filter((n) => n.octave === "CONTRA"),
+      ];
+    }
+
+    if (octave === "4LINE" || octave === "5LINE") {
+      return [
+        ...N.getWhiteKeys().filter((n) => n.octave === "4LINE"),
+        ...N.getWhiteKeys().filter((n) => n.octave === "5LINE"),
+      ];
+    }
+
     return N.getWhiteKeys().filter((n) => n.octave === octave);
   }
 
