@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { allNotes, MusicNote, Octave } from "../n";
+import { MusicNote, N, Octave } from "../n";
 
 export class NotesStore {
   //private notePool: INote[];
@@ -12,19 +12,26 @@ export class NotesStore {
   public twoLineActive: boolean = false;
   public threeLineActive: boolean = false;
   public fourAndFiveLineActive: boolean = false;
+  public amountOfFlatsAndSharps: "LOW" | "MEDIUM" | "HIGH" = "LOW";
 
   constructor() {
     makeAutoObservable(this);
     //this.notePool = [];
-    this.currentNotes = this.getNotesOfOctave("1LINE");
+    this.currentNotes = this.getWhiteNotesOfOctave("1LINE");
     this.currentNoteIndex = 0;
     this.generateNotes();
   }
 
   public generateNotes = () => {
     this.currentNotes = [
-      ...this.getRandomNotes(this.getNotesOfOctave(this.getRandomOctave()), 4),
-      ...this.getRandomNotes(this.getNotesOfOctave(this.getRandomOctave()), 4),
+      ...this.getRandomNotes(
+        this.getWhiteNotesOfOctave(this.getRandomOctave()),
+        4
+      ),
+      ...this.getRandomNotes(
+        this.getWhiteNotesOfOctave(this.getRandomOctave()),
+        4
+      ),
     ];
     this.currentNoteIndex = 0;
   };
@@ -36,7 +43,49 @@ export class NotesStore {
     const randomNotes: MusicNote[] = [];
     for (let i = 0; i < count; i++) {
       const randomIndex = Math.floor(Math.random() * notes.length);
-      randomNotes.push(notes[randomIndex]);
+      const randomNote = notes[randomIndex];
+
+      let amountOfFlatsAndSharpsThreshold = 8;
+      switch (this.amountOfFlatsAndSharps) {
+        case "LOW":
+          amountOfFlatsAndSharpsThreshold = 8;
+          break;
+        case "MEDIUM":
+          amountOfFlatsAndSharpsThreshold = 6;
+          break;
+        case "HIGH":
+          amountOfFlatsAndSharpsThreshold = 4;
+          break;
+      }
+      const withModifier =
+        Math.floor(Math.random() * 10) > amountOfFlatsAndSharpsThreshold;
+      if (withModifier) {
+        if (
+          randomNote.sharpModifierExists() &&
+          randomNote.flatModifierExists()
+        ) {
+          const sharp = Math.floor(Math.random() * 2) > 0;
+          if (sharp) {
+            randomNotes.push(
+              new MusicNote(randomNote.key, randomNote.octave, "sharp")
+            );
+          } else {
+            randomNotes.push(
+              new MusicNote(randomNote.key, randomNote.octave, "flat")
+            );
+          }
+        } else if (randomNote.sharpModifierExists()) {
+          randomNotes.push(
+            new MusicNote(randomNote.key, randomNote.octave, "sharp")
+          );
+        } else if (randomNote.flatModifierExists()) {
+          randomNotes.push(
+            new MusicNote(randomNote.key, randomNote.octave, "flat")
+          );
+        }
+      } else {
+        randomNotes.push(notes[randomIndex]);
+      }
     }
     return randomNotes;
   }
@@ -63,11 +112,11 @@ export class NotesStore {
     return octavePool[randomIndex];
   }
 
-  private getNotesOfOctave(octave: Octave | undefined) {
+  private getWhiteNotesOfOctave(octave: Octave | undefined) {
     if (!octave) {
       return [];
     }
-    return allNotes.filter((n) => n.octave === octave);
+    return N.getWhiteKeys().filter((n) => n.octave === octave);
   }
 
   public checkOnNote(note: MusicNote) {

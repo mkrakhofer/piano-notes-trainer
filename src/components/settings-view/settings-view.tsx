@@ -12,6 +12,7 @@ export const SettingsView = observer((props: IProps) => {
   return (
     <div className="settings-view">
       <form>
+        <h2>Which octaves should be included?</h2>
         <div className="form-row">
           <input
             checked={store.subContraAndContraActive}
@@ -69,6 +70,19 @@ export const SettingsView = observer((props: IProps) => {
             type={"checkbox"}
           />
           <label>Four- and Five line octave</label>
+          <h2>How many sharps and flats should appear?</h2>
+          <select
+            name="flats-sharps-amount"
+            value={store.amountOfFlatsAndSharps}
+            onChange={(e) => {
+              // todo: any
+              store.amountOfFlatsAndSharps = e.target.value as any;
+            }}
+          >
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+          </select>
         </div>
         <button onClick={props.onClose}>Close</button>
       </form>

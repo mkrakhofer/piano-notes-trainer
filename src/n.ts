@@ -21,6 +21,34 @@ export class MusicNote {
     this.modifier = modifier;
   }
 
+  public sharpModifierExists() {
+    if (this.key === "C" && this.octave === "5LINE") {
+      return false;
+    }
+
+    return (
+      this.key === "C" ||
+      this.key === "D" ||
+      this.key === "F" ||
+      this.key === "G" ||
+      this.key === "A"
+    );
+  }
+
+  public flatModifierExists() {
+    if (this.key === "A" && this.octave === "SUBCONTRA") {
+      return false;
+    }
+
+    return (
+      this.key === "H" ||
+      this.key === "A" ||
+      this.key === "G" ||
+      this.key === "E" ||
+      this.key === "D"
+    );
+  }
+
   private getAlias() {
     if (this.modifier === "sharp") {
       switch (this.key) {
@@ -79,6 +107,53 @@ export class MusicNote {
 }
 
 export class N {
+  public static getWhiteKeys() {
+    const whiteKeys: MusicNote[] = [];
+    const octaves: Octave[] = [
+      "CONTRA",
+      "GREAT",
+      "SMALL",
+      "1LINE",
+      "2LINE",
+      "3LINE",
+      "4LINE",
+    ];
+
+    //subcontra
+    whiteKeys.push(N.__A, N.__H);
+
+    octaves.forEach((octave) => {
+      whiteKeys.push(new MusicNote("C", octave));
+      whiteKeys.push(new MusicNote("D", octave));
+      whiteKeys.push(new MusicNote("E", octave));
+      whiteKeys.push(new MusicNote("F", octave));
+      whiteKeys.push(new MusicNote("G", octave));
+      whiteKeys.push(new MusicNote("A", octave));
+      whiteKeys.push(new MusicNote("H", octave));
+    });
+
+    //five line
+    whiteKeys.push(N.c_____);
+
+    return whiteKeys;
+  }
+
+  public static getAllKeys(): MusicNote[] {
+    const allKeys: MusicNote[] = [];
+    const whiteKeys = this.getWhiteKeys();
+
+    whiteKeys.forEach((key) => {
+      allKeys.push(key);
+      if (key.sharpModifierExists()) {
+        allKeys.push(new MusicNote(key.key, key.octave, "sharp"));
+      }
+      if (key.flatModifierExists()) {
+        allKeys.push(new MusicNote(key.key, key.octave, "flat"));
+      }
+    });
+    return allKeys;
+  }
+
   static readonly __A: MusicNote = new MusicNote("A", "SUBCONTRA");
   static readonly __AS: MusicNote = new MusicNote("A", "SUBCONTRA", "sharp");
   static readonly __H: MusicNote = new MusicNote("H", "SUBCONTRA");
@@ -257,7 +332,7 @@ export class N {
   //aS___
   static readonly hF___: MusicNote = new MusicNote("H", "3LINE", "flat");
   //cS____
-  static readonly dF____: MusicNote = new MusicNote("C", "4LINE", "flat");
+  static readonly dF____: MusicNote = new MusicNote("D", "4LINE", "flat");
   //dS____
   static readonly eF____: MusicNote = new MusicNote("E", "4LINE", "flat");
   //fS____
@@ -267,130 +342,3 @@ export class N {
   //aS____
   static readonly hF____: MusicNote = new MusicNote("H", "4LINE", "flat");
 }
-
-export const allNotes: MusicNote[] = [
-  N.__A,
-  N.__AS,
-  N.__HF,
-  N.__H,
-  N._C,
-  N._CS,
-  N._DF,
-  N._D,
-  N._DS,
-  N._EF,
-  N._E,
-  N._F,
-  N._FS,
-  N._GF,
-  N._G,
-  N._GS,
-  N._AF,
-  N._A,
-  N._AS,
-  N._HF,
-  N._H,
-  N.C,
-  N.CS,
-  N.DF,
-  N.D,
-  N.DS,
-  N.EF,
-  N.E,
-  N.F,
-  N.FS,
-  N.GF,
-  N.G,
-  N.GS,
-  N.AF,
-  N.A,
-  N.AS,
-  N.HF,
-  N.H,
-  N.c,
-  N.cS,
-  N.dF,
-  N.d,
-  N.dS,
-  N.eF,
-  N.e,
-  N.f,
-  N.fS,
-  N.gF,
-  N.g,
-  N.gS,
-  N.aF,
-  N.a,
-  N.aS,
-  N.hF,
-  N.h,
-  N.c_,
-  N.cS_,
-  N.dF_,
-  N.d_,
-  N.dS_,
-  N.eF_,
-  N.e_,
-  N.f_,
-  N.fS_,
-  N.gF_,
-  N.g_,
-  N.gS_,
-  N.aF_,
-  N.a_,
-  N.aS_,
-  N.hF_,
-  N.h_,
-  N.c__,
-  N.cS__,
-  N.dF__,
-  N.d__,
-  N.dS__,
-  N.eF__,
-  N.e__,
-  N.f__,
-  N.fS__,
-  N.gF__,
-  N.g__,
-  N.gS__,
-  N.aF__,
-  N.a__,
-  N.aS__,
-  N.hF__,
-  N.h__,
-  N.c___,
-  N.cS___,
-  N.dF___,
-  N.d___,
-  N.dS___,
-  N.eF___,
-  N.e___,
-  N.f___,
-  N.fS___,
-  N.gF___,
-  N.g___,
-  N.gS___,
-  N.aF___,
-  N.a___,
-  N.aS___,
-  N.hF___,
-  N.h___,
-  N.c____,
-  N.cS____,
-  N.dF____,
-  N.d____,
-  N.dS____,
-  N.eF____,
-  N.e____,
-  N.f____,
-  N.fS____,
-  N.gF____,
-  N.g____,
-  N.gS____,
-  N.aF____,
-  N.a____,
-  N.aS____,
-  N.hF____,
-  N.h____,
-  N.c_____,
-];
