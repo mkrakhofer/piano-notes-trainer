@@ -1,0 +1,47 @@
+.ottava-bassa {
+  position: relative;
+  left: 0;
+  width: 0;
+  height: 0;
+}
+.ottava-bassa .start {
+  font-style: italic;
+  position: absolute;
+  width: 45px;
+  height: 16px;
+}
+.ottava-bassa .start .eight {
+  width: 15px;
+}
+.ottava-bassa .start .dashed-line {
+  position: absolute;
+  left: 15px;
+  top: 8px;
+  height: 1px;
+  width: 30px;
+  max-width: 30px;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23333' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+.ottava-bassa .middle {
+  left: 45px;
+  position: absolute;
+  height: 1px;
+  top: 8px;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23333' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+.ottava-bassa .end {
+  position: absolute;
+  width: 45px;
+  height: 1px;
+  top: 8px;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23333' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+.ottava-bassa .end .end-line {
+  height: 8px;
+  width: 1px;
+  background: black;
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+}
+/*# sourceMappingURL=ottava-bassa.css.map */
