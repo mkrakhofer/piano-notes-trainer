@@ -31,7 +31,8 @@ export class NotesStore {
 
   public generateBars = (count: number) => {
     if (this.preferredClefSetting === "RANDOM") {
-      this.currentPreferredClef = Math.random() * 2 > 0 ? "TREBLE" : "BASS";
+      this.currentPreferredClef =
+        Math.floor(Math.random() * 2) > 0 ? "TREBLE" : "BASS";
     } else {
       this.currentPreferredClef = this.preferredClefSetting;
     }
