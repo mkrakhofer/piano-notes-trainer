@@ -4,9 +4,9 @@ import { Notemap } from "./notemap";
 import { Grid } from "./components/grid/grid";
 import { getNotesStore } from "./stores/notes-store";
 import { observer } from "mobx-react-lite";
-import { MusicNote } from "./n";
 import ReactModal from "react-modal";
 import { SettingsView } from "./components/settings-view/settings-view";
+import { MusicNote } from "./classes/music-note";
 
 type MIDIAccess = WebMidi.MIDIAccess;
 type MIDIInputMap = WebMidi.MIDIInputMap;
@@ -47,11 +47,11 @@ export const App = observer(() => {
 
   const handleNoteOn = (noteOnBinString: string) => {
     /*
-                                      e.g.: 10010000 00111100 01001101
-                                      10010000 -> "Note on"
-                                      00111100 -> Key
-                                      01001101 -> Velocity
-                                    */
+                                                                  e.g.: 10010000 00111100 01001101
+                                                                  10010000 -> "Note on"
+                                                                  00111100 -> Key
+                                                                  01001101 -> Velocity
+                                                                */
     const key = noteOnBinString.substring(8, 16);
     console.log("KEY: ", getKeyByBinString(key));
     getNotesStore().checkOnNote(getKeyByBinString(key));
@@ -72,7 +72,7 @@ export const App = observer(() => {
 
   const closeSettings = () => {
     setShowSettings(false);
-    getNotesStore().generateNotes();
+    getNotesStore().generateBars(2);
   };
 
   const disconnect = () => {
@@ -99,8 +99,10 @@ export const App = observer(() => {
       Connections: {inputs.size}
       <button onClick={reconnect}>Reset Connection</button>
       <button onClick={openSettings}>Settings</button>
-      <button onClick={getNotesStore().generateNotes}>Generate notes</button>
-      <Grid notes={getNotesStore().currentNotes} />
+      <button onClick={() => getNotesStore().generateBars(2)}>
+        Generate notes
+      </button>
+      <Grid bars={getNotesStore().currentBars} />
       <ReactModal isOpen={showSettings}>
         <SettingsView onClose={closeSettings} />
       </ReactModal>

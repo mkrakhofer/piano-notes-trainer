@@ -1,10 +1,13 @@
 import { makeAutoObservable } from "mobx";
-import { MusicNote, N, Octave } from "../n";
+import { MusicNote, Octave } from "../classes/music-note";
+import { N } from "../classes/n";
+import { Bar } from "../classes/bar";
 
 export class NotesStore {
   //private notePool: INote[];
-  public currentNotes: MusicNote[];
+  public currentBars: Bar[];
   public currentNoteIndex: number;
+  public currentBarIndex: number;
   public subContraAndContraActive: boolean = false;
   public greatActive: boolean = false;
   public smallActive: boolean = true;
@@ -20,30 +23,36 @@ export class NotesStore {
   constructor() {
     makeAutoObservable(this);
     //this.notePool = [];
-    this.currentNotes = this.getWhiteNotesOfOctave("1LINE");
+    this.currentBars = [];
     this.currentNoteIndex = 0;
-    this.generateNotes();
+    this.currentBarIndex = 0;
+    this.generateBars(2);
   }
 
-  public generateNotes = () => {
+  public generateBars = (count: number) => {
     if (this.preferredClefSetting === "RANDOM") {
       this.currentPreferredClef = Math.random() * 2 > 0 ? "TREBLE" : "BASS";
     } else {
       this.currentPreferredClef = this.preferredClefSetting;
     }
 
-    this.currentNotes = [
-      ...this.getRandomNotes(
-        this.getWhiteNotesOfOctave(this.getRandomOctave()),
-        4
-      ),
-      ...this.getRandomNotes(
-        this.getWhiteNotesOfOctave(this.getRandomOctave()),
-        4
-      ),
-    ];
+    const bars: Bar[] = [];
+
+    for (let i = 0; i < count; i++) {
+      const octave = this.getRandomOctave();
+      if (octave) {
+        bars.push(this.getRandomBar(octave));
+      }
+    }
+
+    this.currentBars = bars;
+    this.currentBarIndex = 0;
     this.currentNoteIndex = 0;
   };
+
+  private getRandomBar(octave: Octave) {
+    return new Bar(this.getRandomNotes(this.getWhiteNotesOfOctave(octave), 4));
+  }
 
   private getRandomNotes(notes: MusicNote[], count: number) {
     if (notes.length === 0) {
@@ -132,14 +141,30 @@ export class NotesStore {
   public checkOnNote(note: MusicNote) {
     console.log("Check");
     if (
-      note.equals(this.currentNotes[this.currentNoteIndex]) ||
-      note.equalsAlias(this.currentNotes[this.currentNoteIndex])
+      note.equals(
+        this.currentBars[this.currentBarIndex].notes[this.currentNoteIndex]
+      ) ||
+      note.equalsAlias(
+        this.currentBars[this.currentBarIndex].notes[this.currentNoteIndex]
+      )
     ) {
       console.log("Success");
-      if (this.currentNoteIndex === this.currentNotes.length - 1) {
-        this.generateNotes();
+      if (
+        this.currentBarIndex === this.currentBars.length - 1 &&
+        this.currentNoteIndex ===
+          this.currentBars[this.currentBarIndex].notes.length - 1
+      ) {
+        this.generateBars(2);
       } else {
-        this.currentNoteIndex++;
+        if (
+          this.currentNoteIndex ===
+          this.currentBars[this.currentBarIndex].notes.length - 1
+        ) {
+          this.currentBarIndex++;
+          this.currentNoteIndex = 0;
+        } else {
+          this.currentNoteIndex++;
+        }
       }
     }
   }

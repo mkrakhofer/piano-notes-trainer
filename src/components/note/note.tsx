@@ -4,7 +4,7 @@ import clsx from "clsx";
 import sharp from "../../icons/sharp.svg";
 import flat from "../../icons/flat.svg";
 import { observer } from "mobx-react-lite";
-import { MusicNote } from "../../n";
+import { MusicNote } from "../../classes/music-note";
 
 interface IProps {
   taildir: "u" | "d";
@@ -15,14 +15,17 @@ interface IProps {
   note: MusicNote;
   isCurrent?: boolean;
   isSuccess?: boolean;
+  startOfBar?: boolean;
+  endOfLastBar?: boolean;
 }
 
 export const Note = observer((props: IProps) => {
-  console.log(props.note);
   const className = clsx("note", {
     "tail-down": props.taildir === "d",
     "is-current": props.isCurrent,
     "is-success": props.isSuccess,
+    "bar-start": props.startOfBar,
+    "bar-end": props.endOfLastBar,
   });
 
   const id = `${props.note.key}-${props.note.octave}${
@@ -94,6 +97,8 @@ export const Note = observer((props: IProps) => {
       )}
       {props.modifier === "f" && <img src={flat} className="flat" alt="logo" />}
       <div className="tail" />
+      {props.startOfBar && <div className="bar-start" />}
+      {props.endOfLastBar && <div className="bar-end" />}
     </div>
   );
 });

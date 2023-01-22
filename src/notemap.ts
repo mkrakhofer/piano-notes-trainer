@@ -1,4 +1,5 @@
-import {MusicNote, N} from "./n";
+import {N} from "./classes/n";
+import {MusicNote} from "./classes/music-note";
 
 /**
  * Maps a 8bit binary key string to corresponding key/octave

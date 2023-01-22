@@ -1,10 +1,12 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import "./line.css";
 import clsx from "clsx";
 import { Note } from "../note/note";
 import { observer } from "mobx-react-lite";
-import { MusicNote } from "../../n";
 import { getNotesStore } from "../../stores/notes-store";
+import { MusicNote } from "../../classes/music-note";
+import { Bar } from "../../classes/bar";
+import { Gap } from "../gap/gap";
 
 interface IProps {
   // note
@@ -29,7 +31,7 @@ interface IProps {
   d: "u" | "d";
   // visible
   v?: boolean;
-  notes: MusicNote[];
+  bars: Bar[];
   // border on the left / right
   b?: boolean;
   // required elper lines for notes
@@ -38,27 +40,49 @@ interface IProps {
   ho?: boolean;
   treble?: boolean;
   bass?: boolean;
+  // top most visible line
+  tm?: boolean;
 }
 
 export const Line = observer((props: IProps) => {
+  console.log("RENDER LINE: ", props.bars);
+
   const className = clsx("line", {
     visible: props.v,
   });
 
-  return (
-    <div className={className}>
-      {props.b && <div className="border-left" />}
-      {props.b && <div className="border-right" />}
-      {props.notes.map((note, index) => {
-        if (
-          (props.treble && getNotesStore().currentPreferredClef === "BASS") ||
-          (props.bass && getNotesStore().currentPreferredClef === "TREBLE")
-        ) {
-          return <div key={index} className="gap" />;
-        }
+  const renderBars = () => {
+    const rendered: ReactNode[] = [];
 
-        const isCurrent = index === getNotesStore().currentNoteIndex;
-        const isSuccess = index < getNotesStore().currentNoteIndex;
+    props.bars.forEach((bar, barIndex) => {
+      bar.notes.forEach((note, index) => {
+        const startOfBar = props.tm && index === 0;
+        const endOfLastBar =
+            props.tm &&
+            barIndex === props.bars.length - 1 &&
+            index === bar.notes.length - 1;
+
+        if (
+            (props.treble && getNotesStore().currentPreferredClef === "BASS") ||
+            (props.bass && getNotesStore().currentPreferredClef === "TREBLE")
+        ) {
+          rendered.push(
+              <Gap
+                  key={`${barIndex}-${index}`}
+                  startOfBar={startOfBar}
+                  endOfLastBar={endOfLastBar}
+              />
+          );
+          return;
+        }
+        //console.log("NOTE: ", note);
+        const isCurrent =
+            barIndex === getNotesStore().currentBarIndex &&
+            index === getNotesStore().currentNoteIndex;
+        const isSuccess =
+            barIndex < getNotesStore().currentBarIndex ||
+            (barIndex === getNotesStore().currentBarIndex &&
+                index < getNotesStore().currentNoteIndex);
         const isNote = note.equals(props.n);
         const isSharp = note.equals(props.s);
         const isFlat = note.equals(props.f);
@@ -70,37 +94,56 @@ export const Line = observer((props: IProps) => {
         const isFourLineFlat = note.equals(props.flf);
 
         if (
-          isNote ||
-          isSharp ||
-          isFlat ||
-          isSubcontra ||
-          isSubcontraSharp ||
-          isSubcontraFlat ||
-          isFourLine ||
-          isFourLineSharp ||
-          isFourLineFlat
+            isNote ||
+            isSharp ||
+            isFlat ||
+            isSubcontra ||
+            isSubcontraSharp ||
+            isSubcontraFlat ||
+            isFourLine ||
+            isFourLineSharp ||
+            isFourLineFlat
         ) {
-          return (
-            <Note
-              helperOffset={props.ho}
-              helperLines={props.h}
-              note={note}
-              taildir={props.d}
-              modifier={
-                isSharp || isSubcontraSharp || isFourLineSharp
-                  ? "s"
-                  : isFlat || isSubcontraFlat || isFourLineFlat
-                  ? "f"
-                  : undefined
-              }
-              isCurrent={isCurrent}
-              isSuccess={isSuccess}
-              key={index}
-            />
+          rendered.push(
+              <Note
+                  helperOffset={props.ho}
+                  helperLines={props.h}
+                  note={note}
+                  taildir={props.d}
+                  modifier={
+                    isSharp || isSubcontraSharp || isFourLineSharp
+                        ? "s"
+                        : isFlat || isSubcontraFlat || isFourLineFlat
+                            ? "f"
+                            : undefined
+                  }
+                  isCurrent={isCurrent}
+                  isSuccess={isSuccess}
+                  startOfBar={startOfBar}
+                  endOfLastBar={endOfLastBar}
+                  key={`${barIndex}-${index}`}
+              />
           );
+          return;
         }
-        return <div key={index} className="gap" />;
-      })}
-    </div>
+        rendered.push(
+            <Gap
+                key={`${barIndex}-${index}`}
+                startOfBar={startOfBar}
+                endOfLastBar={endOfLastBar}
+            />
+        );
+      });
+    });
+
+    return rendered;
+  };
+
+  return (
+      <div className={className}>
+        {props.b && <div className="border-left"/>}
+        {props.b && <div className="border-right"/>}
+        {renderBars()}
+      </div>
   );
 });

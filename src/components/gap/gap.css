@@ -1,0 +1,26 @@
+.gap {
+  position: relative;
+  flex: 1;
+  min-width: 24px;
+  width: 24px;
+  height: 16px;
+  border: 1px solid transparent;
+  margin: 0 32px;
+}
+.gap .bar-start {
+  position: absolute;
+  width: 1px;
+  height: 253px;
+  background: black;
+  left: -33px;
+  top: 0px;
+}
+.gap .bar-end {
+  position: absolute;
+  width: 1px;
+  height: 253px;
+  background: black;
+  right: -33px;
+  top: 0px;
+}
+/*# sourceMappingURL=gap.css.map */

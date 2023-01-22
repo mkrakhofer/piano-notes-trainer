@@ -29,6 +29,22 @@
   top: -12px;
   height: 32px;
 }
+.note .bar-start {
+  position: absolute;
+  width: 1px;
+  height: 253px;
+  background: black;
+  left: -32px;
+  top: 8px;
+}
+.note .bar-end {
+  position: absolute;
+  width: 1px;
+  height: 253px;
+  background: black;
+  right: -32px;
+  top: 8px;
+}
 .note .helper {
   width: 40px;
   height: 1px;
