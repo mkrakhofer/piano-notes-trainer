@@ -32,17 +32,44 @@ export class SettingsStore {
   }
 
   public loadSettings() {
-    this.subContraAndContraActive =
-      this.cookies.get("subContraAndContraActive") === "true";
-    this.greatActive = this.cookies.get("greatActive") === "true";
-    this.smallActive = this.cookies.get("smallActive") === "true";
-    this.oneLineActive = this.cookies.get("oneLineActive") === "true";
-    this.twoLineActive = this.cookies.get("twoLineActive") === "true";
-    this.threeLineActive = this.cookies.get("threeLineActive") === "true";
-    this.fourAndFiveLineActive =
-      this.cookies.get("fourAndFiveLineActive") === "true";
-    this.amountOfFlatsAndSharps = this.cookies.get("amountOfFlatsAndSharps");
-    this.preferredClefSetting = this.cookies.get("preferredClefSetting");
+    const subcontraAndContraCookie = this.cookies.get(
+      "subContraAndContraActive"
+    );
+    const greatCookie = this.cookies.get("greatActive");
+    const smallCookie = this.cookies.get("smallActive");
+    const oneLineCookie = this.cookies.get("oneLineActive");
+    const twoLineCookie = this.cookies.get("twoLineActive");
+    const threeLineCookie = this.cookies.get("threeLineActive");
+    const fourAndFiveLineCookie = this.cookies.get("fourAndFiveLineActive");
+    const amountOfFlatsAndSharpsCookie = this.cookies.get(
+      "amountOfFlatsAndSharps"
+    );
+    const preferredClefCookie = this.cookies.get("preferredClefSetting");
+
+    if (subcontraAndContraCookie !== undefined)
+      this.subContraAndContraActive = subcontraAndContraCookie === "true";
+
+    if (greatCookie !== undefined) this.greatActive = greatCookie === "true";
+
+    if (smallCookie !== undefined) this.smallActive = smallCookie === "true";
+
+    if (oneLineCookie !== undefined)
+      this.oneLineActive = oneLineCookie === "true";
+
+    if (twoLineCookie !== undefined)
+      this.twoLineActive = twoLineCookie === "true";
+
+    if (threeLineCookie !== undefined)
+      this.threeLineActive = threeLineCookie === "true";
+
+    if (fourAndFiveLineCookie !== undefined)
+      this.fourAndFiveLineActive = fourAndFiveLineCookie === "true";
+
+    if (amountOfFlatsAndSharpsCookie !== undefined)
+      this.amountOfFlatsAndSharps = amountOfFlatsAndSharpsCookie;
+
+    if (preferredClefCookie !== undefined)
+      this.preferredClefSetting = preferredClefCookie;
   }
 }
 
