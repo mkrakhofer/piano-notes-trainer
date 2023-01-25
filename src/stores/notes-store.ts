@@ -31,8 +31,8 @@ export class NotesStore {
 
     const bars: Bar[] = [];
 
+    const octave = this.getRandomOctave();
     for (let i = 0; i < count; i++) {
-      const octave = this.getRandomOctave();
       if (octave) {
         bars.push(this.getRandomBar(octave));
       }
